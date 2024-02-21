@@ -24,11 +24,10 @@ namespace WikipediaWalkerWinFormsDevExpressApp
             shape.Width = 30;
             shape.Height = 15;
 
-            // Рассчитываем координаты вершины на основе ее индекса
-            float radius = 1500; // Радиус круга, в котором будут расположены вершины
-            float centerX = diagramControl.Width / 2; // X-координата центра диаграммы
-            float centerY = diagramControl.Height / 2; // Y-координата центра диаграммы
-            double angle = (2 * Math.PI * index) / totalVertices; // Угол для равномерного распределения вершин по кругу
+            float radius = 1500; 
+            float centerX = diagramControl.Width / 2; 
+            float centerY = diagramControl.Height / 2;
+            double angle = (2 * Math.PI * index) / totalVertices; 
             float x = centerX + (float)(radius * Math.Cos(angle));
             float y = centerY + (float)(radius * Math.Sin(angle));
 

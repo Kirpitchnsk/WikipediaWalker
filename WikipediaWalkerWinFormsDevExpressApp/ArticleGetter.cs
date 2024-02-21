@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using WikipediaWalkerWinFormsDevExpressApp;
 
 namespace WikipediaWalker
 {
@@ -10,7 +11,7 @@ namespace WikipediaWalker
         private static string dictancesBetweenArticles;
         public ArticleGetter()
         {
-            dictancesBetweenArticles = "links.txt";
+            dictancesBetweenArticles = Resource1.links;
             articleLinks = ReadArticleLinks();
         }
     
@@ -22,7 +23,7 @@ namespace WikipediaWalker
             try
             {
                 // Чтение связей из файла
-                var lines = File.ReadAllLines(dictancesBetweenArticles);
+                var lines = dictancesBetweenArticles.Split("\n");
 
                 foreach (string line in lines)
                 {
