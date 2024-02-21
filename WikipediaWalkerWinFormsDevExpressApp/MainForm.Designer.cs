@@ -54,7 +54,7 @@
             // 
             infoLabel.Appearance.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             infoLabel.Appearance.Options.UseFont = true;
-            infoLabel.Location = new System.Drawing.Point(393, 44);
+            infoLabel.Location = new System.Drawing.Point(249, 22);
             infoLabel.Name = "infoLabel";
             infoLabel.Size = new System.Drawing.Size(393, 47);
             infoLabel.TabIndex = 1;
@@ -62,7 +62,7 @@
             // 
             // startArticleField
             // 
-            startArticleField.Location = new System.Drawing.Point(203, 168);
+            startArticleField.Location = new System.Drawing.Point(59, 146);
             startArticleField.Name = "startArticleField";
             startArticleField.Properties.Appearance.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             startArticleField.Properties.Appearance.Options.UseFont = true;
@@ -71,7 +71,7 @@
             // 
             // endArticleField
             // 
-            endArticleField.Location = new System.Drawing.Point(704, 168);
+            endArticleField.Location = new System.Drawing.Point(560, 146);
             endArticleField.Name = "endArticleField";
             endArticleField.Properties.Appearance.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             endArticleField.Properties.Appearance.Options.UseFont = true;
@@ -82,7 +82,7 @@
             // 
             reverseButton.Appearance.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             reverseButton.Appearance.Options.UseFont = true;
-            reverseButton.Location = new System.Drawing.Point(499, 171);
+            reverseButton.Location = new System.Drawing.Point(355, 149);
             reverseButton.Name = "reverseButton";
             reverseButton.Size = new System.Drawing.Size(168, 51);
             reverseButton.TabIndex = 4;
@@ -93,7 +93,7 @@
             // 
             findPathButton.Appearance.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             findPathButton.Appearance.Options.UseFont = true;
-            findPathButton.Location = new System.Drawing.Point(499, 271);
+            findPathButton.Location = new System.Drawing.Point(355, 249);
             findPathButton.Name = "findPathButton";
             findPathButton.Size = new System.Drawing.Size(168, 51);
             findPathButton.TabIndex = 5;
@@ -104,7 +104,7 @@
             // 
             saveToFileButton.Appearance.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             saveToFileButton.Appearance.Options.UseFont = true;
-            saveToFileButton.Location = new System.Drawing.Point(428, 506);
+            saveToFileButton.Location = new System.Drawing.Point(294, 510);
             saveToFileButton.Name = "saveToFileButton";
             saveToFileButton.Size = new System.Drawing.Size(329, 51);
             saveToFileButton.TabIndex = 6;
@@ -112,14 +112,14 @@
             // 
             // graphVisualizer
             // 
-            graphVisualizer.Location = new System.Drawing.Point(24, 592);
+            graphVisualizer.Location = new System.Drawing.Point(25, 580);
             graphVisualizer.Name = "graphVisualizer";
             graphVisualizer.OptionsBehavior.SelectedStencils = new DevExpress.Diagram.Core.StencilCollection(new string[] { "BasicShapes", "BasicFlowchartShapes" });
             graphVisualizer.OptionsView.CanvasSizeMode = DevExpress.Diagram.Core.CanvasSizeMode.Fill;
             graphVisualizer.OptionsView.PageSize = new System.Drawing.SizeF(1123F, 794F);
             graphVisualizer.OptionsView.PaperKind = System.Drawing.Printing.PaperKind.A4;
             graphVisualizer.OptionsView.Theme = DevExpress.Diagram.Core.DiagramThemes.Office;
-            graphVisualizer.Size = new System.Drawing.Size(1070, 396);
+            graphVisualizer.Size = new System.Drawing.Size(773, 396);
             graphVisualizer.TabIndex = 7;
             graphVisualizer.Text = "diagramControl1";
             // 

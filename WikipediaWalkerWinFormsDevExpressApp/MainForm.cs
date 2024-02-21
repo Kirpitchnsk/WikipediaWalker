@@ -37,12 +37,19 @@ namespace WikipediaWalkerWinFormsDevExpressApp
             var startArticle = startArticleField.Text;
             var endArticle = endArticleField.Text;
 
-            var graph = PathFinder.FindShortestPaths(startArticle,endArticle);
-            var shortestDistance = graph.Dijkstra(startArticle,endArticle);
+            var graph = PathFinder.FindShortestPaths(startArticle, endArticle);
+            var shortestDistance = graph.Dijkstra(startArticle, endArticle);
             var countPaths = graph.CountPaths(startArticle, endArticle);
 
-            resultLabel.Text = $"Всего найдено {countPaths} путей c " +
-                $"Минимальным расстоянием {shortestDistance} между \n {startArticle} и {endArticle}";
+            saveToFileButton.Visible = true;
+            graphVisualizer.Visible = true;
+
+            resultLabel.Text = $"Всего найдено {countPaths} путей c \n" +
+                $"Минимальным расстоянием {shortestDistance.Count} между \n {startArticle} и {endArticle}";
+
+            var graphVisualization = new GraphVisualization(graphVisualizer);
+
+            graphVisualization.DrawGraph(graph, startArticle, endArticle);
 
         }
     }

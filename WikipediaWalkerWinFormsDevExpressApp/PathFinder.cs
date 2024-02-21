@@ -106,7 +106,7 @@ namespace WikipediaWalker
 
             foreach (var arrowPath in allPathsAsArrows)
             {
-                var path = arrowPath.Split("->");
+                var path = arrowPath.Split(" -> ");
                 for (int i = 0; i < path.Length - 1; i++)
                 {
                     graph.AddEdge(path[i], path[i + 1], i + 1);

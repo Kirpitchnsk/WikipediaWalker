@@ -5,7 +5,7 @@ namespace WikipediaWalker
 {
     public class Graph
     {
-        private static Dictionary<string, Dictionary<string, int>> adjacencyList;
+        public Dictionary<string, Dictionary<string, int>> adjacencyList { get; private set; }
 
         public Graph()
         {
@@ -26,6 +26,7 @@ namespace WikipediaWalker
 
             adjacencyList[start][end] = weight;
         }
+
         public List<string> Dijkstra(string start, string finish)
         {
             var INF = 1_000_000 + 9;
@@ -47,7 +48,7 @@ namespace WikipediaWalker
                     if (!visited.Contains(vertex.Key) && vertex.Value < minTraffic)
                     {
                         minTraffic = vertex.Value;
-                        argMinTraffic = vertex.Key;
+                        argMinTraffic = vertex.Key.Trim();
                     }
                 }
 
