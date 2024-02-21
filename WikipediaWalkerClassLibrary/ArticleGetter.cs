@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using WikipediaWalkerWinFormsDevExpressApp;
-
-namespace WikipediaWalker
+﻿namespace WikipediaWalkerClassLibrary
 {
     public class ArticleGetter
     {

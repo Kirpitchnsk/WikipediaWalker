@@ -1,7 +1,6 @@
 ﻿using Python.Runtime;
-using System.Collections.Generic;
 
-namespace WikipediaWalker
+namespace WikipediaWalkerClassLibrary
 {
     public class ArticleGetterPython
     {

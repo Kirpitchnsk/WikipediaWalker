@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using DevExpress.Diagram.Core;
+﻿using DevExpress.Diagram.Core;
+using DevExpress.Mvvm.Native;
+using DevExpress.Utils.Extensions;
 using DevExpress.XtraDiagram;
-using WikipediaWalker;
+using System;
+using System.Collections.Generic;
+using WikipediaWalkerClassLibrary;
 
-namespace WikipediaWalkerWinFormsDevExpressApp
+namespace WikipediaWalkerDevExpressApp
 {
     public class GraphVisualization
     {
