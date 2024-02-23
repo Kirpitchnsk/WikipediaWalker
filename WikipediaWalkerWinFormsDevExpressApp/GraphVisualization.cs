@@ -1,6 +1,4 @@
 ﻿using DevExpress.Diagram.Core;
-using DevExpress.Mvvm.Native;
-using DevExpress.Utils.Extensions;
 using DevExpress.XtraDiagram;
 using System;
 using System.Collections.Generic;
