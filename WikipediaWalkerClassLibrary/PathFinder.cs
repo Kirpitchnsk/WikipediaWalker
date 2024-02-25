@@ -10,7 +10,7 @@
         /// <returns>Возвращает граф путей</returns>
         public static Graph FindShortestPaths(string startArticle, string endArticle)
         {
-            var articleGetter = new ArticleGetter();
+            var articleGetter = new ArticleManager();
 
             var startVisited = new HashSet<string>();
             var endVisited = new HashSet<string>();

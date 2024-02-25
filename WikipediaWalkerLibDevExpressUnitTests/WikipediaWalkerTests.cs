@@ -25,7 +25,7 @@ public class WikipediaWalkerTests
     public void ReadArticleLinks_Test()
     {
         // Вызов тестируемой функции
-        var result = ArticleGetter.ReadArticleLinks();
+        var result = ArticleManager.ReadArticleLinks();
 
         // Проверка, что возвращенный результат не равен null
         Assert.IsNotNull(result);
@@ -46,7 +46,7 @@ public class WikipediaWalkerTests
     {
         // Вызов тестируемой функции
 
-        var articleGetter = new ArticleGetter();
+        var articleGetter = new ArticleManager();
         var result = articleGetter.FindArticleLinks(article);
 
         // Проверка, что возвращенный результат соответствует ожидаемым связям

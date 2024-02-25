@@ -56,9 +56,9 @@
             infoLabel.Appearance.Options.UseFont = true;
             infoLabel.Location = new System.Drawing.Point(397, 42);
             infoLabel.Name = "infoLabel";
-            infoLabel.Size = new System.Drawing.Size(393, 47);
+            infoLabel.Size = new System.Drawing.Size(352, 47);
             infoLabel.TabIndex = 1;
-            infoLabel.Text = "Найти кратчайшие пути из";
+            infoLabel.Text = "Find shortest paths from";
             // 
             // startArticleField
             // 
@@ -97,7 +97,7 @@
             findPathButton.Name = "findPathButton";
             findPathButton.Size = new System.Drawing.Size(168, 51);
             findPathButton.TabIndex = 5;
-            findPathButton.Text = "Вперед!";
+            findPathButton.Text = "Go!";
             findPathButton.Click += findPathButton_Click;
             // 
             // saveToFileButton
@@ -108,7 +108,7 @@
             saveToFileButton.Name = "saveToFileButton";
             saveToFileButton.Size = new System.Drawing.Size(329, 51);
             saveToFileButton.TabIndex = 6;
-            saveToFileButton.Text = "Сохранить результат";
+            saveToFileButton.Text = "Save result";
             saveToFileButton.Visible = false;
             saveToFileButton.Click += saveToFileButton_Click;
             // 

@@ -1,6 +1,6 @@
 ﻿namespace WikipediaWalkerClassLibrary
 {
-    public class ArticleGetter
+    public class ArticleManager
     { 
         /// <summary>
         /// Хеш таблица для хранения списков связанных статей
@@ -15,12 +15,36 @@
         /// <summary>
         /// Конструктор в котором инициализируются значения переменных
         /// </summary>
-        public ArticleGetter()
+        public ArticleManager()
         {
             distancesBetweenArticles = Resource1.links;
             articleLinks = ReadArticleLinks();
         }
-    
+
+        /// <summary>
+        /// Преобразование названия статьи к виду первая буква заглавная, остальные прописные
+        /// </summary>
+        /// <param name="article">Назавние статьи</param>
+        /// <returns>Врзврат преобразованной строки/returns>
+        public static string InputArticleCorrect(string article)
+        {
+            var firstLetter = article[0].ToString().ToUpper();
+            var changedArticle = article.ToLower().ToCharArray();
+            changedArticle[0] = firstLetter.Trim()[0];
+            return new string(changedArticle);
+        }
+
+        /// <summary>
+        /// Функция для проверки статей на существование
+        /// </summary>
+        /// <param name="article1">Первая статья</param>
+        /// <param name="article2">Вторая статья</param>
+        public static bool CheckSpelling(string article1, string article2)
+        {
+            var allArticles = Resource1.articles.Split("\n").ToList();
+            return allArticles.Contains(article1) && allArticles.Contains(article2);  
+        }
+
         /// <summary>
         /// Функция для чтения связей из файла и сохранения их в хэш-таблицу
         /// </summary>
@@ -35,7 +59,7 @@
                 // Чтение связей из файла
                 var lines = distancesBetweenArticles.Split("\n");
 
-                foreach (string line in lines)
+                foreach (var line in lines)
                 {
                     var parts = line.Split("\t");
                     if (parts.Length == 2)

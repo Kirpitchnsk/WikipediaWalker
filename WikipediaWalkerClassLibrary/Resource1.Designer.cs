@@ -61,6 +61,45 @@ namespace WikipediaWalkerClassLibrary {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на %C3%81ed%C3%A1n_mac_Gabr%C3%A1in
+        ///%C3%85land
+        ///%C3%89douard_Manet
+        ///%C3%89ire
+        ///%C3%93engus_I_of_the_Picts
+        ///%E2%82%AC2_commemorative_coins
+        ///10th_century
+        ///11th_century
+        ///12th_century
+        ///13th_century
+        ///14th_century
+        ///15th_Marine_Expeditionary_Unit
+        ///15th_century
+        ///16_Cygni
+        ///16_Cygni_Bb
+        ///16th_century
+        ///1755_Lisbon_earthquake
+        ///17th_century
+        ///1896_Summer_Olympics
+        ///18th_century
+        ///1928_Okeechobee_Hurricane
+        ///1973_oil_crisis
+        ///1980_eruption_of_Mount_St._Helens
+        ///1997_Pacific_hurricane_season
+        ///19th_century
+        ///1_Ceres
+        ///1st_century
+        ///1st_century_BC
+        ///2-6-0
+        ///2-8-0
+        ///20 [остаток строки не уместился]&quot;;.
+        /// </summary>
+        internal static string articles {
+            get {
+                return ResourceManager.GetString("articles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на %C3%81ed%C3%A1n_mac_Gabr%C3%A1in	Bede
         ///%C3%81ed%C3%A1n_mac_Gabr%C3%A1in	Columba
         ///%C3%81ed%C3%A1n_mac_Gabr%C3%A1in	D%C3%A1l_Riata
