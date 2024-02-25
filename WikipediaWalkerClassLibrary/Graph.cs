@@ -26,7 +26,7 @@
 
         public List<string> Dijkstra(string start, string finish)
         {
-            var INF = 1_000_000 + 9;
+            const int INF = 1_000_000 + 9;
 
             var data = adjacencyList.Keys.ToDictionary(key => key, key => INF);
             var cameFrom = adjacencyList.Keys.ToDictionary(key => key, key => "");
@@ -106,24 +106,6 @@
             {
                 CountPathsDFS(neighbor.Key, endVertex, ref count);
             }
-        }
-
-        public string GetInfo()
-        {
-            var graphInfo = string.Empty;
-
-            foreach (var vertex in adjacencyList)
-            {
-                var start = vertex.Key;
-                foreach (var edge in vertex.Value)
-                {
-                    var end = edge.Key;
-                    var weight = edge.Value;
-                    graphInfo += $"({start}, {end}, вес {weight})";
-                }
-            }
-
-            return graphInfo;
         }
     }
 }

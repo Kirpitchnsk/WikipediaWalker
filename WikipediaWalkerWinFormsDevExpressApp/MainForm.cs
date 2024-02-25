@@ -10,13 +10,6 @@ namespace WikipediaWalkerWinFormsDevExpressApp
         public MainForm()
         {
             InitializeComponent();
-            saveToFileButton.Visible = false;
-            graphVisualizer.Visible = false;
-        }
-
-        private void mainForm_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void reverseButton_Click(object sender, EventArgs e)
@@ -44,6 +37,11 @@ namespace WikipediaWalkerWinFormsDevExpressApp
             var graphVisualization = new GraphVisualization(graphVisualizer);
 
             graphVisualization.DrawGraph(graph, startArticle, endArticle);
+
+        }
+
+        private void saveToFileButton_Click(object sender, EventArgs e)
+        {
 
         }
     }

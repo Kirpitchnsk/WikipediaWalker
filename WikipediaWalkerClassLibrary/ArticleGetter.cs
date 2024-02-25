@@ -11,7 +11,7 @@
         }
     
         // Функция для чтения связей из файла и сохранения их в хэш-таблицу
-        private static Dictionary<string, List<string>> ReadArticleLinks()
+        public static Dictionary<string, List<string>> ReadArticleLinks()
         {
             var links = new Dictionary<string, List<string>>();
 
