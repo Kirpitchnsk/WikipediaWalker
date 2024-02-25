@@ -6,17 +6,33 @@ using WikipediaWalkerClassLibrary;
 
 namespace WikipediaWalkerDevExpressApp
 {
-    public class GraphVisualization
+
+    /// <summary>
+    /// Класс который изображает граф путей на интерфейсе
+    /// </summary>
+    public class GraphVisualizatior
     {
+        /// <summary>
+        /// Инициализация поля для рисования
+        /// </summary>
         private DiagramControl diagramControl;
+
+        /// <summary>
+        /// Список вершин графа
+        /// </summary>
         private Dictionary<string, DiagramShape> vertexItems;
 
-        public GraphVisualization(DiagramControl diagramControl)
+        /// <summary>
+        /// Инициализация инструмента для изображения графа
+        /// </summary>
+        /// <param name="diagramControl">Элемент DiagramControl</param>
+        public GraphVisualizatior(DiagramControl diagramControl)
         {
             this.diagramControl = diagramControl;
-            this.vertexItems = new Dictionary<string, DiagramShape>();
+            vertexItems = new Dictionary<string, DiagramShape>();
         }
 
+        
         private void AddDiagramShape(string vertex, int index, int totalVertices)
         {
             var shape = new DiagramShape();

@@ -1,16 +1,31 @@
 ﻿namespace WikipediaWalkerClassLibrary
 {
     public class ArticleGetter
-    {
+    { 
+        /// <summary>
+        /// Хеш таблица для хранения списков связанных статей
+        /// </summary>
         private static Dictionary<string, List<string>> articleLinks;
+
+        /// <summary>
+        /// Хранение данных из файла со связями
+        /// </summary>
         private static string distancesBetweenArticles;
+        
+        /// <summary>
+        /// Конструктор в котором инициализируются значения переменных
+        /// </summary>
         public ArticleGetter()
         {
             distancesBetweenArticles = Resource1.links;
             articleLinks = ReadArticleLinks();
         }
     
-        // Функция для чтения связей из файла и сохранения их в хэш-таблицу
+        /// <summary>
+        /// Функция для чтения связей из файла и сохранения их в хэш-таблицу
+        /// </summary>
+        /// <returns>Возвращает хэш-таблицу со связями между статьями</returns>
+        /// <exception cref="Exception">Файл не существует</exception>
         public static Dictionary<string, List<string>> ReadArticleLinks()
         {
             var links = new Dictionary<string, List<string>>();
@@ -50,7 +65,12 @@
 
             return links;
         }
-        // Функция для поиска связей для заданной статьи
+
+        /// <summary>
+        /// Функция для поиска связей для заданной статьи
+        /// </summary>
+        /// <param name="articleToFind">Необходимая статья</param>
+        /// <returns>Возвращает список связей статьи</returns>
         public List<string> FindArticleLinks(string articleToFind)
         {
             var links = new List<string>();

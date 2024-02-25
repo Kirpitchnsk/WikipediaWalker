@@ -12,6 +12,9 @@ namespace WikipediaWalkerWinFormsDevExpressApp
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Смена местами качальной и конечной статьи
+        /// </summary>
         private void reverseButton_Click(object sender, EventArgs e)
         {
             var templateText = startArticleField.Text;
@@ -19,6 +22,9 @@ namespace WikipediaWalkerWinFormsDevExpressApp
             endArticleField.Text = templateText;
         }
 
+        /// <summary>
+        /// При нажатии на эту кнопку будут выведены расстояние и изображение графа путей
+        /// </summary>
         private void findPathButton_Click(object sender, EventArgs e)
         {
             var startArticle = startArticleField.Text;
@@ -34,7 +40,7 @@ namespace WikipediaWalkerWinFormsDevExpressApp
             resultLabel.Text = $"Всего найдено {countPaths} путей c \n" +
                 $"Минимальным расстоянием {shortestDistance.Count} между \n {startArticle} и {endArticle}";
 
-            var graphVisualization = new GraphVisualization(graphVisualizer);
+            var graphVisualization = new GraphVisualizatior(graphVisualizer);
 
             graphVisualization.DrawGraph(graph, startArticle, endArticle);
 

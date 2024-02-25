@@ -4,11 +4,19 @@ namespace WikipediaWalkerClassLibrary
 {
     public class ArticleGetterPython
     {
+        /// <summary>
+        /// Класс, взаимодейтсвующий с Pyhton.NET. Инициализация движка python
+        /// </summary>
         public ArticleGetterPython() 
         {
             Runtime.PythonDLL = @"C:\Users\nskru\AppData\Local\Programs\Python\Python312\python312.dll";
         }
 
+        /// <summary>
+        /// Получение ссылок содержащиеся в статье с использованием python
+        /// </summary>
+        /// <param name="articleTitle"></param>
+        /// <returns>Возвращает список всех связей текущей статьи</returns>
         public static List<string> GetLinks(string articleTitle)
         {
             PythonEngine.Initialize();

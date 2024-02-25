@@ -2,15 +2,21 @@
 {
     public class Graph
     {
+        /// <summary>
+        /// Задание графа списком смежности
+        /// </summary>
         public Dictionary<string, Dictionary<string, int>> adjacencyList { get; private set; }
 
+        /// <summary>
+        /// Инициализация графа и списка смежности
+        /// </summary>
         public Graph()
         {
             adjacencyList = new Dictionary<string, Dictionary<string, int>>();
         }
 
         /// <summary>
-        /// Add edge into graph
+        /// Добавление фершины в граф
         /// </summary>
         /// <param name="start">Start vertice</param>
         /// <param name="end">End vertice</param>
@@ -32,7 +38,7 @@
         }
 
         /// <summary>
-        /// Dijkstra algorithm of graph.
+        /// Алгоритм Дейкстры
         /// </summary>
         /// <param name="start">Start veritce</param>
         /// <param name="finish">End vertice</param>
@@ -94,6 +100,12 @@
             return path;
         }
 
+        /// <summary>
+        /// Счетчик числа путей в графе
+        /// </summary>
+        /// <param name="startVertex">Начальная вершина</param>
+        /// <param name="endVertex">Конечная вершина</param>
+        /// <returns>Число путей между двумя вершинами в графе</returns>
         public int CountPaths(string startVertex, string endVertex)
         {
             // Инициализация счетчика путей
@@ -105,6 +117,12 @@
             return count;
         }
 
+        /// <summary>
+        /// Поиск в глубину в графе
+        /// </summary>
+        /// <param name="currentVertex">Начальная вершина</param>
+        /// <param name="endVertex">Конечная вершина</param>
+        /// <param name="count">Ссылка на счетчик путей</param>
         private void CountPathsDFS(string currentVertex, string endVertex, ref int count)
         {
             // Если текущая вершина равна конечной, увеличиваем счетчик путей

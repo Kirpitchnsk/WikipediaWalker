@@ -2,6 +2,12 @@
 {
     public class PathFinder
     {
+        /// <summary>
+        /// Нахождение всех путей между статьями, построение общего графа путей
+        /// </summary>
+        /// <param name="startArticle">Начальная статья</param>
+        /// <param name="endArticle">Конечная статья</param>
+        /// <returns>Возвращает граф путей</returns>
         public static Graph FindShortestPaths(string startArticle, string endArticle)
         {
             var articleGetter = new ArticleGetter();
