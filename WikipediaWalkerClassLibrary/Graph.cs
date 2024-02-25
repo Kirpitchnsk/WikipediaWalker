@@ -9,6 +9,13 @@
             adjacencyList = new Dictionary<string, Dictionary<string, int>>();
         }
 
+        /// <summary>
+        /// Add edge into graph
+        /// </summary>
+        /// <param name="start">Start vertice</param>
+        /// <param name="end">End vertice</param>
+        /// <param name="weight">Weight of edge
+        /// </param>
         public void AddEdge(string start, string end, int weight)
         {
 
@@ -24,6 +31,12 @@
             adjacencyList[start][end] = weight;
         }
 
+        /// <summary>
+        /// Dijkstra algorithm of graph.
+        /// </summary>
+        /// <param name="start">Start veritce</param>
+        /// <param name="finish">End vertice</param>
+        /// <returns>List of verticises</returns>
         public List<string> Dijkstra(string start, string finish)
         {
             const int INF = 1_000_000 + 9;

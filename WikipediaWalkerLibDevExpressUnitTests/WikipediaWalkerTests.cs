@@ -1,6 +1,3 @@
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using WikipediaWalkerClassLibrary;
 
 [TestFixture]
@@ -172,10 +169,10 @@ public class WikipediaWalkerTests
     public void ConvertFromJson_WhenInvalidJsonStringProvided_ReturnsDefaultObject()
     {
         // Arrange
-        string invalidJsonString = "invalid json string";
+        var invalidJsonString = "invalid json string";
 
         // Act
-        Person deserializedPerson = jsonConverter.ConvertFromJson(invalidJsonString);
+        var deserializedPerson = jsonConverter.ConvertFromJson(invalidJsonString);
 
         // Assert
         Assert.IsNull(deserializedPerson);

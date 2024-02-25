@@ -3,10 +3,10 @@
     public class ArticleGetter
     {
         private static Dictionary<string, List<string>> articleLinks;
-        private static string dictancesBetweenArticles;
+        private static string distancesBetweenArticles;
         public ArticleGetter()
         {
-            dictancesBetweenArticles = Resource1.links;
+            distancesBetweenArticles = Resource1.links;
             articleLinks = ReadArticleLinks();
         }
     
@@ -18,7 +18,7 @@
             try
             {
                 // Чтение связей из файла
-                var lines = dictancesBetweenArticles.Split("\n");
+                var lines = distancesBetweenArticles.Split("\n");
 
                 foreach (string line in lines)
                 {
@@ -45,7 +45,7 @@
             }
             catch (Exception ex)
             {
-                throw new Exception($"Ошибка чтения файла {dictancesBetweenArticles}: {ex.Message}");
+                throw new Exception($"Ошибка чтения файла {distancesBetweenArticles}: {ex.Message}");
             }
 
             return links;

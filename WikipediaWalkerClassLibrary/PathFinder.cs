@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace WikipediaWalkerClassLibrary
+﻿namespace WikipediaWalkerClassLibrary
 {
     public class PathFinder
     {
