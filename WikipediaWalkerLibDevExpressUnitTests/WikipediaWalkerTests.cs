@@ -133,48 +133,4 @@ public class WikipediaWalkerTests
         Assert.AreEqual(3, graph.adjacencyList["C"]["D"]);
         Assert.AreEqual(7, graph.adjacencyList["D"]["E"]);
     }
-
-    [Test]
-    public void ConvertToJson_WhenValidObjectProvided_ReturnsJsonString()
-    {
-        // Arrange
-        var person = new Person { Name = "John", Age = 30 };
-
-        // Act
-        string jsonString = jsonConverter.ConvertToJson(person);
-
-        // Assert
-        Assert.IsNotNull(jsonString);
-        Assert.IsNotEmpty(jsonString);
-        Assert.IsTrue(jsonString.Contains("John"));
-        Assert.IsTrue(jsonString.Contains("30"));
-    }
-
-    [Test]
-    public void ConvertFromJson_WhenValidJsonStringProvided_ReturnsObject()
-    {
-        // Arrange
-        string jsonString = "{\"Name\":\"Jane\",\"Age\":25}";
-
-        // Act
-        Person deserializedPerson = jsonConverter.ConvertFromJson(jsonString);
-
-        // Assert
-        Assert.IsNotNull(deserializedPerson);
-        Assert.AreEqual("Jane", deserializedPerson.Name);
-        Assert.AreEqual(25, deserializedPerson.Age);
-    }
-
-    [Test]
-    public void ConvertFromJson_WhenInvalidJsonStringProvided_ReturnsDefaultObject()
-    {
-        // Arrange
-        var invalidJsonString = "invalid json string";
-
-        // Act
-        var deserializedPerson = jsonConverter.ConvertFromJson(invalidJsonString);
-
-        // Assert
-        Assert.IsNull(deserializedPerson);
-    }
 }

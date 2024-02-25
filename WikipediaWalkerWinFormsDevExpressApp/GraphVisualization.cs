@@ -23,12 +23,12 @@ namespace WikipediaWalkerDevExpressApp
             shape.Width = 30;
             shape.Height = 15;
 
-            float radius = 1500; 
-            float centerX = diagramControl.Width / 2; 
-            float centerY = diagramControl.Height / 2;
-            double angle = (2 * Math.PI * index) / totalVertices; 
-            float x = centerX + (float)(radius * Math.Cos(angle));
-            float y = centerY + (float)(radius * Math.Sin(angle));
+            var radius = 1500; 
+            var centerX = diagramControl.Width / 2; 
+            var centerY = diagramControl.Height / 2;
+            var angle = (2 * Math.PI * index) / totalVertices; 
+            var x = centerX + (float)(radius * Math.Cos(angle));
+            var y = centerY + (float)(radius * Math.Sin(angle));
 
             shape.Position = new DevExpress.Utils.PointFloat(x, y);
             shape.Content = vertex;
@@ -42,8 +42,8 @@ namespace WikipediaWalkerDevExpressApp
             diagramControl.Items.Clear();
             vertexItems.Clear();
 
-            int totalVertices = graph.adjacencyList.Count;
-            int index = 0;
+            var totalVertices = graph.adjacencyList.Count;
+            var index = 0;
 
             // Отображаем узлы
             foreach (var vertex in graph.adjacencyList.Keys)
