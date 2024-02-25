@@ -28,10 +28,18 @@
         /// <returns>Врзврат преобразованной строки/returns>
         public static string InputArticleCorrect(string article)
         {
-            var firstLetter = article[0].ToString().ToUpper();
-            var changedArticle = article.ToLower().ToCharArray();
-            changedArticle[0] = firstLetter.Trim()[0];
-            return new string(changedArticle);
+            if(article.Length > 1)
+            {
+                var currentArticle = article.Trim();
+                var firstLetter = currentArticle[0].ToString().ToUpper();
+                var changedArticle = currentArticle.ToLower().ToCharArray();
+                changedArticle[0] = firstLetter[0];
+                return new string(changedArticle);
+            }
+            else
+            {
+                return article;
+            }
         }
 
         /// <summary>
