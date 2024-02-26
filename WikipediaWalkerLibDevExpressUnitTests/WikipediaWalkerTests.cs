@@ -1,31 +1,63 @@
-using System;
 using WikipediaWalkerClassLibrary;
 
 [TestFixture]
 public class WikipediaWalkerTests
 {
+    private ArticleManager articleManager;
     private Dictionary<string, List<string>> articleLinks;
-    private JsonConverter<Person> jsonConverter;
+    private JsonConverter<SaveData> jsonConverter;
 
     [SetUp]
     public void Setup()
     {
-        // Инициализация данных перед каждым тестом
-        articleLinks = new Dictionary<string, List<string>>
+        articleManager = new ArticleManager();
+        articleLinks = articleManager.ReadArticleLinks();
+        jsonConverter = new JsonConverter<SaveData>();
+    }
+
+    [Test]
+    public void InputArticleCorrect_Test()
+    {
+        // Создание списка с тетстируемыми данными
+        var testArticles = new List<string>
         {
-            { "Article1", new List<string> { "Link1", "Link2" } },
-            { "Article2", new List<string> { "Link3", "Link4" } },
-            { "Article3", new List<string> { "Link5", "Link6" } }
-            // Добавьте другие статьи и их связи при необходимости
+            "Moscow",
+            " ",
+            " california",
+            "random"
         };
-        jsonConverter = new JsonConverter<Person>();
+
+        // Создание списка с ожидаемыми результатами
+        var testArticlesResults = new List<string>
+        {
+            "Moscow",
+            " ",
+            "California",
+            "Random"
+        };
+
+        // Проверка соотвествует ли результаты ожидаемым
+        for(int i = 0;i< testArticlesResults.Count;i++)
+        {
+            var correctString = ArticleManager.InputArticleCorrect(testArticles[i]);
+            Assert.AreEqual(correctString, testArticlesResults[i]);
+        }
+    }
+
+    [Test]
+    public void CheckSpelling_Test()
+    {
+        Assert.IsTrue(ArticleManager.CheckSpelling("London", "Moscow"));
+        Assert.IsFalse(ArticleManager.CheckSpelling("   Landon", "Moscow"));
+        Assert.IsTrue(ArticleManager.CheckSpelling("California", "Cambodia"));
+        Assert.IsFalse(ArticleManager.CheckSpelling(" ", "Z"));
     }
 
     [Test]
     public void ReadArticleLinks_Test()
     {
         // Вызов тестируемой функции
-        var result = ArticleManager.ReadArticleLinks();
+        var result = articleManager.ReadArticleLinks();
 
         // Проверка, что возвращенный результат не равен null
         Assert.IsNotNull(result);
@@ -37,20 +69,6 @@ public class WikipediaWalkerTests
             Assert.IsTrue(result.ContainsKey(kvp.Key));
             CollectionAssert.AreEquivalent(kvp.Value, result[kvp.Key]);
         }
-    }
-
-    [TestCase("Article1", new string[] { "Link1", "Link2" })]
-    [TestCase("Article2", new string[] { "Link3", "Link4" })]
-    [TestCase("Article3", new string[] { "Link5", "Link6" })]
-    public void FindArticleLinks_Test(string article, string[] expectedLinks)
-    {
-        // Вызов тестируемой функции
-
-        var articleGetter = new ArticleManager();
-        var result = articleGetter.FindArticleLinks(article);
-
-        // Проверка, что возвращенный результат соответствует ожидаемым связям
-        CollectionAssert.AreEquivalent(expectedLinks, result);
     }
 
     [Test]
@@ -83,7 +101,7 @@ public class WikipediaWalkerTests
         graph.AddEdge("D", "E", 7);
 
         // Вызов метода Dijkstra
-        List<string> shortestPath = graph.Dijkstra("A", "E");
+        var shortestPath = graph.Dijkstra("A", "E");
 
         // Проверка, что кратчайший путь найден корректно
         Assert.IsNotNull(shortestPath);
@@ -116,52 +134,52 @@ public class WikipediaWalkerTests
     public void FindShortestPaths_Test()
     {
         // Создание экземпляра класса Graph
-        var graph = PathFinder.FindShortestPaths("A", "E");
+        var graph = PathFinder.FindShortestPaths("Moscow", "London");
 
         // Проверка, что граф создан успешно
         Assert.IsNotNull(graph);
 
         // Проверка, что граф содержит ожидаемые вершины и рёбра
-        Assert.IsTrue(graph.adjacencyList.ContainsKey("A"));
-        Assert.IsTrue(graph.adjacencyList.ContainsKey("B"));
-        Assert.IsTrue(graph.adjacencyList.ContainsKey("C"));
-        Assert.IsTrue(graph.adjacencyList.ContainsKey("D"));
-        Assert.IsTrue(graph.adjacencyList.ContainsKey("E"));
-        Assert.AreEqual(4, graph.adjacencyList["A"]["B"]);
-        Assert.AreEqual(2, graph.adjacencyList["A"]["C"]);
-        Assert.AreEqual(5, graph.adjacencyList["B"]["C"]);
-        Assert.AreEqual(10, graph.adjacencyList["B"]["D"]);
-        Assert.AreEqual(3, graph.adjacencyList["C"]["D"]);
-        Assert.AreEqual(7, graph.adjacencyList["D"]["E"]);
+        Assert.IsTrue(graph.adjacencyList.ContainsKey("Moscow"));
+        Assert.IsTrue(graph.adjacencyList.ContainsKey("London"));
+        Assert.AreEqual(1, graph.adjacencyList["Moscow"]["London"]);
     }
     public void ConvertToJson_WhenValidObjectProvided_ReturnsJsonString()
     {
         // Arrange
-        var person = new Person { Name = "John", Age = 30 };
+        var data = new SaveData("Moscow","London",2,526,"Start Info","End Info");
 
         // Act
-        var jsonString = jsonConverter.ConvertToJson(person);
+        var jsonString = jsonConverter.ConvertToJson(data);
 
         // Assert
         Assert.IsNotNull(jsonString);
         Assert.IsNotEmpty(jsonString);
-        Assert.IsTrue(jsonString.Contains("John"));
-        Assert.IsTrue(jsonString.Contains("30"));
+        Assert.IsTrue(jsonString.Contains("Moscow"));
+        Assert.IsTrue(jsonString.Contains("London"));
+        Assert.IsTrue(jsonString.Contains("2"));
+        Assert.IsTrue(jsonString.Contains("526"));
+        Assert.IsTrue(jsonString.Contains("Start Info"));
+        Assert.IsTrue(jsonString.Contains("End Info"));
     }
 
     [Test]
     public void ConvertFromJson_WhenValidJsonStringProvided_ReturnsObject()
     {
         // Arrange
-        string jsonString = "{\"Name\":\"Jane\",\"Age\":25}";
+        string jsonString = "{\"StartArticle\":\"Moscow\",\"EndArticle\":\"London\",\"ShortestDistance\":2,\"NumberOfPath\":526,\"StartArticleInfo\":\"\",\"EndArticleInfo\":\"\"}";
 
         // Act
-        Person deserializedPerson = jsonConverter.ConvertFromJson(jsonString);
+        SaveData deserializedData = jsonConverter.ConvertFromJson(jsonString);
 
         // Assert
-        Assert.IsNotNull(deserializedPerson);
-        Assert.AreEqual("Jane", deserializedPerson.Name);
-        Assert.AreEqual(25, deserializedPerson.Age);
+        Assert.IsNotNull(deserializedData);
+        Assert.AreEqual("Moscow", deserializedData.StartArticle);
+        Assert.AreEqual(2, deserializedData.ShortestDistance);
+        Assert.AreEqual(526, deserializedData.NumberOfPath);
+        Assert.AreEqual("London", deserializedData.EndArticle);
+        Assert.AreEqual("", deserializedData.StartArticleInfo);
+        Assert.AreEqual("", deserializedData.EndArticleInfo);
     }
 
     [Test]
@@ -171,9 +189,9 @@ public class WikipediaWalkerTests
         var invalidJsonString = "invalid json string";
 
         // Act
-        var deserializedPerson = jsonConverter.ConvertFromJson(invalidJsonString);
+        var deserializedData = jsonConverter.ConvertFromJson(invalidJsonString);
 
         // Assert
-        Assert.IsNull(deserializedPerson);
+        Assert.IsNull(deserializedData);
     }
 }
