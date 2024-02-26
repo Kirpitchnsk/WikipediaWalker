@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using System;
+using System.IO;
 using System.Windows.Forms;
 using WikipediaWalkerClassLibrary;
 using WikipediaWalkerDevExpressApp;
@@ -8,11 +9,11 @@ namespace WikipediaWalkerWinFormsDevExpressApp
 {
     public partial class MainForm : DevExpress.XtraEditors.XtraForm
     {
-        Graph graph;
-        int shortestDistance;
-        int numberOfPaths;
-        string startArticle;
-        string endArticle;
+        private Graph graph;
+        private int shortestDistance;
+        private int numberOfPaths;
+        private string startArticle;
+        private string endArticle;
 
         public MainForm()
         {
@@ -39,7 +40,7 @@ namespace WikipediaWalkerWinFormsDevExpressApp
             startArticleField.Text = startArticle.ToString();
             endArticleField.Text= endArticle.ToString();
 
-            if(ArticleManager.CheckSpelling(startArticle,endArticle))
+            if(ArticleManager.IsArticleExists(startArticle) && ArticleManager.IsArticleExists(endArticle))
             {
                 graph = PathFinder.FindShortestPaths(startArticle, endArticle);
                 shortestDistance = graph.Dijkstra(startArticle, endArticle).Count;
@@ -87,10 +88,10 @@ namespace WikipediaWalkerWinFormsDevExpressApp
                     var saveData = new SaveData(startArticle,endArticle,shortestDistance,numberOfPaths,"","");
 
                     // Преобразуем объект в JSON строку
-                    string json = jsonConverter.ConvertToJson(saveData);
+                    var json = jsonConverter.ConvertToJson(saveData);
 
                     // Записываем JSON строку в файл
-                    System.IO.File.WriteAllText(filePath, json);
+                    File.WriteAllText(filePath, json);
 
                     XtraMessageBox.Show("Данные успешно сохранены в файл JSON.", "Сохранение завершено", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

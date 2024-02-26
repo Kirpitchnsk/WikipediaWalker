@@ -58,16 +58,16 @@ namespace WikipediaWalkerDevExpressApp
             diagramControl.Items.Clear();
             vertexItems.Clear();
 
-            var totalVertices = graph.adjacencyList.Count;
+            var totalVertices = graph.AdjacencyList.Count;
             var index = 0;
 
             // Отображаем узлы
-            foreach (var vertex in graph.adjacencyList.Keys)
+            foreach (var vertex in graph.AdjacencyList.Keys)
             {
                 AddDiagramShape(vertex, index++, totalVertices);
             }
             // Отображаем ребра
-            foreach (var edge in graph.adjacencyList)
+            foreach (var edge in graph.AdjacencyList)
             {
                 foreach (var item in edge.Value)
                 {

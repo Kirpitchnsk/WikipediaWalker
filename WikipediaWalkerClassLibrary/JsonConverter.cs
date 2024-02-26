@@ -14,7 +14,7 @@ namespace WikipediaWalkerClassLibrary
             try
             {
                 // Преобразование объекта в JSON строку
-                string jsonString = JsonConvert.SerializeObject(obj);
+                var jsonString = JsonConvert.SerializeObject(obj);
                 return jsonString;
             }
             catch (Exception ex)

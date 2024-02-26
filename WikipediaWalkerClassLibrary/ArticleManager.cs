@@ -3,7 +3,7 @@
     public class ArticleManager
     { 
         /// <summary>
-        /// Хеш таблица для хранения списков связанных статей
+        /// Хеш таблица для хранения ссылок на статьи
         /// </summary>
         private static Dictionary<string, List<string>> articleLinks;
 
@@ -11,6 +11,8 @@
         /// Хранение данных из файла со связями
         /// </summary>
         private static string distancesBetweenArticles;
+
+        private static List<string> listOfArticles;
         
         /// <summary>
         /// Конструктор в котором инициализируются значения переменных
@@ -18,6 +20,7 @@
         public ArticleManager()
         {
             distancesBetweenArticles = Resource1.links;
+            listOfArticles = Resource1.articles.Split("\n").ToList();
             articleLinks = ReadArticleLinks();
         }
 
@@ -25,7 +28,7 @@
         /// Преобразование названия статьи к виду первая буква заглавная, остальные прописные
         /// </summary>
         /// <param name="article">Назавние статьи</param>
-        /// <returns>Врзврат преобразованной строки/returns>
+        /// <returns>Врзврат преобразованной строки</returns>
         public static string InputArticleCorrect(string article)
         {
             if(article.Length > 1)
@@ -47,10 +50,9 @@
         /// </summary>
         /// <param name="article1">Первая статья</param>
         /// <param name="article2">Вторая статья</param>
-        public static bool CheckSpelling(string article1, string article2)
+        public static bool IsArticleExists(string article)
         {
-            var allArticles = Resource1.articles.Split("\n").ToList();
-            return allArticles.Contains(article1) && allArticles.Contains(article2);  
+            return listOfArticles.Contains(article);
         }
 
         /// <summary>

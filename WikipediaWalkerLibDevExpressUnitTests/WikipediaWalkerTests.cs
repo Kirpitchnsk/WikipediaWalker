@@ -47,10 +47,10 @@ public class WikipediaWalkerTests
     [Test]
     public void CheckSpelling_Test()
     {
-        Assert.IsTrue(ArticleManager.CheckSpelling("London", "Moscow"));
-        Assert.IsFalse(ArticleManager.CheckSpelling("   Landon", "Moscow"));
-        Assert.IsTrue(ArticleManager.CheckSpelling("California", "Cambodia"));
-        Assert.IsFalse(ArticleManager.CheckSpelling(" ", "Z"));
+        Assert.IsTrue(ArticleManager.IsArticleExists("London", "Moscow"));
+        Assert.IsFalse(ArticleManager.IsArticleExists("   Landon", "Moscow"));
+        Assert.IsTrue(ArticleManager.IsArticleExists("California", "Cambodia"));
+        Assert.IsFalse(ArticleManager.IsArticleExists(" ", "Z"));
     }
 
     [Test]
@@ -81,9 +81,9 @@ public class WikipediaWalkerTests
         graph.AddEdge("A", "B", 5);
 
         // Проверка, что ребро добавлено корректно
-        Assert.IsTrue(graph.adjacencyList.ContainsKey("A"));
-        Assert.IsTrue(graph.adjacencyList.ContainsKey("B"));
-        Assert.AreEqual(5, graph.adjacencyList["A"]["B"]);
+        Assert.IsTrue(graph.AdjacencyList.ContainsKey("A"));
+        Assert.IsTrue(graph.AdjacencyList.ContainsKey("B"));
+        Assert.AreEqual(5, graph.AdjacencyList["A"]["B"]);
     }
 
     [Test]
@@ -140,9 +140,9 @@ public class WikipediaWalkerTests
         Assert.IsNotNull(graph);
 
         // Проверка, что граф содержит ожидаемые вершины и рёбра
-        Assert.IsTrue(graph.adjacencyList.ContainsKey("Moscow"));
-        Assert.IsTrue(graph.adjacencyList.ContainsKey("London"));
-        Assert.AreEqual(1, graph.adjacencyList["Moscow"]["London"]);
+        Assert.IsTrue(graph.AdjacencyList.ContainsKey("Moscow"));
+        Assert.IsTrue(graph.AdjacencyList.ContainsKey("London"));
+        Assert.AreEqual(1, graph.AdjacencyList["Moscow"]["London"]);
     }
     public void ConvertToJson_WhenValidObjectProvided_ReturnsJsonString()
     {

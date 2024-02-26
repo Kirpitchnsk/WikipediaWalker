@@ -5,56 +5,55 @@
         /// <summary>
         /// Задание графа списком смежности
         /// </summary>
-        public Dictionary<string, Dictionary<string, int>> adjacencyList { get; private set; }
+        public Dictionary<string, Dictionary<string, int>> AdjacencyList { get; private set; }
 
         /// <summary>
         /// Инициализация графа и списка смежности
         /// </summary>
         public Graph()
         {
-            adjacencyList = new Dictionary<string, Dictionary<string, int>>();
+            AdjacencyList = new Dictionary<string, Dictionary<string, int>>();
         }
 
         /// <summary>
-        /// Добавление фершины в граф
+        /// Добавление вершины в граф
         /// </summary>
-        /// <param name="start">Start vertice</param>
-        /// <param name="end">End vertice</param>
-        /// <param name="weight">Weight of edge
-        /// </param>
+        /// <param name="start">Начальная вершина</param>
+        /// <param name="end">Конечная вершина</param>
+        /// <param name="weight">Вес вершины</param>
         public void AddEdge(string start, string end, int weight)
         {
 
-            if (!adjacencyList.ContainsKey(start))
+            if (!AdjacencyList.ContainsKey(start))
             {
-                adjacencyList[start] = new Dictionary<string, int>();
+                AdjacencyList[start] = new Dictionary<string, int>();
             }
-            if (!adjacencyList.ContainsKey(end))
+            if (!AdjacencyList.ContainsKey(end))
             {
-                adjacencyList[end] = new Dictionary<string, int>();
+                AdjacencyList[end] = new Dictionary<string, int>();
             }
 
-            adjacencyList[start][end] = weight;
+            AdjacencyList[start][end] = weight;
         }
 
         /// <summary>
         /// Алгоритм Дейкстры
         /// </summary>
-        /// <param name="start">Start veritce</param>
-        /// <param name="finish">End vertice</param>
-        /// <returns>List of verticises</returns>
+        /// <param name="start">Начальная вершина</param>
+        /// <param name="finish">Конечная вершина</param>
+        /// <returns>Возвращает список вершин, образующих кратчайший путь</returns>
         public List<string> Dijkstra(string start, string finish)
         {
             const int INF = 1_000_000 + 9;
 
-            var data = adjacencyList.Keys.ToDictionary(key => key, key => INF);
-            var cameFrom = adjacencyList.Keys.ToDictionary(key => key, key => "");
+            var data = AdjacencyList.Keys.ToDictionary(key => key, key => INF);
+            var cameFrom = AdjacencyList.Keys.ToDictionary(key => key, key => "");
 
             var visited = new HashSet<string>();
 
             data[start] = 0;
 
-            for (int i = 0; i < adjacencyList.Count; ++i)
+            for (int i = 0; i < AdjacencyList.Count; ++i)
             {
                 var argMinTraffic = "";
                 var minTraffic = INF;
@@ -75,9 +74,9 @@
 
                 visited.Add(argMinTraffic);
 
-                if (adjacencyList.ContainsKey(argMinTraffic))
+                if (AdjacencyList.ContainsKey(argMinTraffic))
                 {
-                    foreach (var toVertex in adjacencyList[argMinTraffic])
+                    foreach (var toVertex in AdjacencyList[argMinTraffic])
                     {
                         var newPathTraffic = data[argMinTraffic] + toVertex.Value;
                         if (data[toVertex.Key] > newPathTraffic)
@@ -133,7 +132,7 @@
             }
 
             // Проходим по всем соседним вершинам и рекурсивно вызываем эту функцию для каждой вершины
-            foreach (var neighbor in adjacencyList[currentVertex])
+            foreach (var neighbor in AdjacencyList[currentVertex])
             {
                 CountPathsDFS(neighbor.Key, endVertex, ref count);
             }

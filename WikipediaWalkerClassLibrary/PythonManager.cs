@@ -5,7 +5,7 @@ namespace WikipediaWalkerClassLibrary
     public class PythonManager
     {
         /// <summary>
-        /// Класс, взаимодейтсвующий с Pyhton.NET. Инициализация движка python
+        /// Класс, взаимодействующий с Pyhton.NET. Инициализация движка python
         /// </summary>
         public PythonManager() 
         {
