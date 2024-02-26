@@ -58,7 +58,7 @@
         /// </summary>
         /// <returns>Возвращает хэш-таблицу со связями между статьями</returns>
         /// <exception cref="Exception">Файл не существует</exception>
-        public static Dictionary<string, List<string>> ReadArticleLinks()
+        public Dictionary<string, List<string>> ReadArticleLinks()
         {
             var links = new Dictionary<string, List<string>>();
 
