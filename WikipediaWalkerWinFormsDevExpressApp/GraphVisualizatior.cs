@@ -1,119 +1,92 @@
-﻿using DevExpress.Diagram.Core;
-using DevExpress.XtraDiagram;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using DevExpress.Diagram.Core;
+using DevExpress.Utils;
+using DevExpress.XtraDiagram;
 using WikipediaWalkerClassLibrary;
 
 namespace WikipediaWalkerDevExpressApp
 {
-
-    /// <summary>
-    /// Класс который изображает граф путей на интерфейсе
-    /// </summary>
-    public class GraphVisualizatior
+    public class GraphVisualizer
     {
-        /// <summary>
-        /// Инициализация поля для рисования
-        /// </summary>
-        private DiagramControl diagramControl;
+        private readonly DiagramControl _diagramControl;
+        private readonly Graph _graph;
+        private readonly string _startArticle;
+        private readonly string _endArticle;
 
-        /// <summary>
-        /// Список вершин графа
-        /// </summary>
-        private Dictionary<string, DiagramShape> vertexItems;
-
-        /// <summary>
-        /// Инициализация инструмента для изображения графа
-        /// </summary>
-        /// <param name="diagramControl">Элемент DiagramControl</param>
-        public GraphVisualizatior(DiagramControl diagramControl)
+        public GraphVisualizer(DiagramControl diagramControl, Graph graph, string startArticle, string endArticle)
         {
-            this.diagramControl = diagramControl;
-            vertexItems = new Dictionary<string, DiagramShape>();
+            _diagramControl = diagramControl;
+            _graph = graph;
+            _startArticle = startArticle;
+            _endArticle = endArticle;
+
+            // Отобразить граф при создании экземпляра класса
+            VisualizeGraph();
         }
 
-        
-        private void AddDiagramShape(string vertex, int index, int totalVertices)
+        public void VisualizeGraph()
         {
-            var shape = new DiagramShape();
-            shape.Width = 30;
-            shape.Height = 15;
+            _diagramControl.Items.Clear();
 
-            var radius = 1500; 
-            var centerX = diagramControl.Width / 2; 
-            var centerY = diagramControl.Height / 2;
-            var angle = (2 * Math.PI * index) / totalVertices; 
-            var x = centerX + (float)(radius * Math.Cos(angle));
-            var y = centerY + (float)(radius * Math.Sin(angle));
+            // Определяем начальную и конечную вершины для выделения цветом
+            var startVertex = _startArticle; // Начальная вершина
+            var endVertex = _endArticle;   // Конечная вершина
 
-            shape.Position = new DevExpress.Utils.PointFloat(x, y);
-            shape.Content = vertex;
-            diagramControl.Items.Add(shape);
-            vertexItems[vertex] = shape;
-        }
-
-        public void DrawGraph(Graph graph, string startVertex, string endVertex)
-        {
-            // Очищаем диаграмму перед рисованием нового графа
-            diagramControl.Items.Clear();
-            vertexItems.Clear();
-
-            var totalVertices = graph.AdjacencyList.Count;
-            var index = 0;
-
-            // Отображаем узлы
-            foreach (var vertex in graph.AdjacencyList.Keys)
+            // Отображаем вершины графа
+            var vertexItems = new Dictionary<string, DiagramShape>();
+            var rnd = new Random();
+            var counter = 0;
+            foreach (var vertex in _graph.AdjacencyList.Keys)
             {
-                AddDiagramShape(vertex, index++, totalVertices);
-            }
-            // Отображаем ребра
-            foreach (var edge in graph.AdjacencyList)
-            {
-                foreach (var item in edge.Value)
+                var isStart = vertex == startVertex;
+                var isEnd = vertex == endVertex;
+
+                // Генерируем случайное положение вершины
+                var position = new PointFloat(rnd.Next(100, _diagramControl.Width - 100), rnd.Next(100, _diagramControl.Height - 100));
+
+                if (isStart) position = new PointFloat(20f, _diagramControl.Height / 2);
+                if (isEnd) position = new PointFloat(_diagramControl.Width + 20f, _diagramControl.Height / 2);
+
+                // Создаем графический элемент для вершины
+
+                var vertexShape = new DiagramShape
                 {
-                    AddDiagramConnector(edge.Key, item.Key, item.Value);
+                    Position = position,
+                    Content = vertex,
+                    Width = 150,
+                    Height = 150,
+                    BackgroundId = isStart || isEnd ? DiagramThemeColorId.Black: DiagramThemeColorId.Accent6_1
+                };
+
+                // Добавляем вершину в диаграмму
+                _diagramControl.Items.Add(vertexShape);
+                vertexItems[vertex] = vertexShape;
+                counter++;
+            }
+
+            // Отображаем ребра графа
+            foreach (var startVertexEntry in _graph.AdjacencyList)
+            {
+                var startVertexName = startVertexEntry.Key;
+                var startPosition = vertexItems[startVertexName];
+                foreach (var endVertexEntry in startVertexEntry.Value)
+                {
+                    var endVertexName = endVertexEntry.Key;
+
+                    // Создаем линию (ребро) между вершинами
+                    var edge = new DiagramConnector
+                    {
+                        BeginItem = vertexItems[startVertexName],
+                        EndItem = vertexItems[endVertexName],
+                        BeginItemPointIndex = 1,
+                        EndItemPointIndex = 1
+                    };
+
+                    // Добавляем линию в диаграмму
+                    _diagramControl.Items.Add(edge);
                 }
-            }
-
-            // Выделяем начальную вершину
-            HighlightVertex(startVertex, DiagramThemeColorId.Accent1);
-
-            // Выделяем конечную вершину
-            HighlightVertex(endVertex, DiagramThemeColorId.Accent2);
-        }
-
-        private void AddDiagramConnector(string sourceVertex, string targetVertex, int weight)
-        {
-            var connector = new DiagramConnector();
-            connector.BeginItem = vertexItems[sourceVertex];
-            connector.EndItem = vertexItems[targetVertex];
-            connector.Content = weight.ToString();
-
-            // Установим цвет ребра в зависимости от веса
-            if (weight == 1)
-            {
-                connector.BackgroundId = DiagramThemeColorId.Accent3;
-            }
-            else if (weight == 2)
-            {
-                connector.BackgroundId = DiagramThemeColorId.Accent4;
-            }
-            else
-            {
-                connector.BackgroundId = DiagramThemeColorId.Accent5;
-            }
-
-            diagramControl.Items.Add(connector);
-        }
-
-        private void HighlightVertex(string vertex, DiagramThemeColorId color)
-        {
-            if (vertexItems.ContainsKey(vertex))
-            {
-                var item = vertexItems[vertex];
-                item.BackgroundId = color;
             }
         }
     }
-
 }

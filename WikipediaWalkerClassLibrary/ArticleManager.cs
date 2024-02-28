@@ -29,7 +29,7 @@
         /// </summary>
         /// <param name="article">Назавние статьи</param>
         /// <returns>Врзврат преобразованной строки</returns>
-        public static string InputArticleCorrect(string article)
+        public string InputArticleCorrect(string article)
         {
             if(article.Length > 1)
             {
@@ -50,7 +50,7 @@
         /// </summary>
         /// <param name="article1">Первая статья</param>
         /// <param name="article2">Вторая статья</param>
-        public static bool IsArticleExists(string article)
+        public bool IsArticleExists(string article)
         {
             return listOfArticles.Contains(article);
         }

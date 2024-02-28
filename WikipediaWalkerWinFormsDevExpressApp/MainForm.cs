@@ -7,13 +7,16 @@ using WikipediaWalkerDevExpressApp;
 
 namespace WikipediaWalkerWinFormsDevExpressApp
 {
-    public partial class MainForm : DevExpress.XtraEditors.XtraForm
+    public partial class MainForm : XtraForm
     {
         private Graph graph;
         private int shortestDistance;
         private int numberOfPaths;
         private string startArticle;
         private string endArticle;
+        private ArticleManager articleManager;
+        private int maxNumberPaths;
+        private int maxLengthPath;
 
         public MainForm()
         {
@@ -35,38 +38,49 @@ namespace WikipediaWalkerWinFormsDevExpressApp
         /// </summary>
         private void findPathButton_Click(object sender, EventArgs e)
         {
-            startArticle = ArticleManager.InputArticleCorrect(startArticleField.Text);
-            endArticle = ArticleManager.InputArticleCorrect(endArticleField.Text);
+            articleManager = new ArticleManager();
+
+            startArticle = articleManager.InputArticleCorrect(startArticleField.Text);
+            endArticle = articleManager.InputArticleCorrect(endArticleField.Text);
             startArticleField.Text = startArticle.ToString();
-            endArticleField.Text= endArticle.ToString();
+            endArticleField.Text = endArticle.ToString();
 
-            if(ArticleManager.IsArticleExists(startArticle) && ArticleManager.IsArticleExists(endArticle))
+            if (articleManager.IsArticleExists(startArticle) && articleManager.IsArticleExists(endArticle))
             {
-                graph = PathFinder.FindShortestPaths(startArticle, endArticle);
-                shortestDistance = graph.Dijkstra(startArticle, endArticle).Count;
-                numberOfPaths = graph.CountPaths(startArticle, endArticle);
-
-                saveToFileButton.Visible = true;
-                graphVisualizer.Visible = true;
-
-                resultLabel.Text = $"Found {numberOfPaths} paths \n" +
-                    $"with shortest distance equals {shortestDistance} between \n {startArticle} и {endArticle}";
-
-                var graphVisualization = new GraphVisualizatior(graphVisualizer);
-
-                graphVisualization.DrawGraph(graph, startArticle, endArticle);
+                maxLengthPath = int.MaxValue;
+                UpdateData();
             }
             else
             {
                 resultLabel.Text = "Incorrect input or one of arricles does not exists";
             }
-           
+        }
+
+        void UpdateData()
+        {
+            if (!InputValidator.CheckNumber(distanceNumberField.Text, out maxNumberPaths))
+            {
+                XtraMessageBox.Show("Введен неверный формат числа");
+                return;
+            }
+
+            saveToFileButton.Visible = true;
+            graphVisualizer.Visible = true;
+
+            graph = PathFinder.FindShortestPaths(startArticle, endArticle, maxNumberPaths,maxLengthPath);
+            shortestDistance = graph.Dijkstra(startArticle, endArticle).Count;
+            numberOfPaths = graph.CountPaths(startArticle, endArticle);
+
+            resultLabel.Text = $"Found {numberOfPaths} paths \n" +
+                $"with shortest distance equals {shortestDistance} between \n {startArticle} и {endArticle}";
+
+            var graphVisualization = new GraphVisualizer(graphVisualizer, graph, startArticle, endArticle);
         }
 
         private void saveToFileButton_Click(object sender, EventArgs e)
         {
             // Создаем объект диалогового окна сохранения файла
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            var saveFileDialog = new SaveFileDialog();
 
             // Устанавливаем свойства диалогового окна
             saveFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
@@ -85,7 +99,7 @@ namespace WikipediaWalkerWinFormsDevExpressApp
                     var jsonConverter = new JsonConverter<SaveData>();
 
                     // Создаем объект сохраняемых данных
-                    var saveData = new SaveData(startArticle,endArticle,shortestDistance,numberOfPaths,"","");
+                    var saveData = new SaveData(startArticle, endArticle, shortestDistance, numberOfPaths, "", "");
 
                     // Преобразуем объект в JSON строку
                     var json = jsonConverter.ConvertToJson(saveData);
@@ -100,6 +114,12 @@ namespace WikipediaWalkerWinFormsDevExpressApp
                     XtraMessageBox.Show($"Произошла ошибка при сохранении файла: {ex.Message}", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void distanceChooseRadioGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var edit = sender as RadioGroup;
+            maxLengthPath = edit.SelectedIndex;
         }
     }
 }

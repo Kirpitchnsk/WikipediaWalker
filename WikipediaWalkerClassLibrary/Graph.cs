@@ -1,4 +1,7 @@
-﻿namespace WikipediaWalkerClassLibrary
+﻿using DevExpress.Diagram.Core.Layout;
+using DevExpress.Utils.DirectXPaint;
+
+namespace WikipediaWalkerClassLibrary
 {
     public class Graph
     {
@@ -36,13 +39,14 @@
             AdjacencyList[start][end] = weight;
         }
 
+
         /// <summary>
         /// Алгоритм Дейкстры
         /// </summary>
-        /// <param name="start">Начальная вершина</param>
-        /// <param name="finish">Конечная вершина</param>
+        /// <param name="startArticle">Начальная вершина</param>
+        /// <param name="endArtcicle">Конечная вершина</param>
         /// <returns>Возвращает список вершин, образующих кратчайший путь</returns>
-        public List<string> Dijkstra(string start, string finish)
+        public List<string> Dijkstra(string startArticle, string endArtcicle)
         {
             const int INF = 1_000_000 + 9;
 
@@ -51,7 +55,7 @@
 
             var visited = new HashSet<string>();
 
-            data[start] = 0;
+            data[startArticle] = 0;
 
             for (int i = 0; i < AdjacencyList.Count; ++i)
             {
@@ -88,11 +92,11 @@
                 }
             }
 
-            var path = new List<string> { finish };
-            while (cameFrom[finish] != "")
+            var path = new List<string> { endArtcicle };
+            while (cameFrom[endArtcicle] != "")
             {
-                path.Add(cameFrom[finish]);
-                finish = cameFrom[finish];
+                path.Add(cameFrom[endArtcicle]);
+                endArtcicle = cameFrom[endArtcicle];
             }
 
             path.Reverse();

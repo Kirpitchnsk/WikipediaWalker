@@ -14,6 +14,16 @@ def is_page_exists(page_title):
     page = get_api_page(page_title)
     return page.exists()
 
+def get_wikipedia_info(page_title):
+    page = get_api_page(page_title)
+
+    if is_page_exists(page_title):
+        return "Название статьи: "+page.title
+        "URL статьи: "+ page.fullurl
+        +"Краткое описание: "+page.summary
+    else:
+        return "No data"
+
 def get_page_links(page_title):
 
     # Проверяем, существует ли страница

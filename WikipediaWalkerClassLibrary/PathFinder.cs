@@ -8,7 +8,7 @@
         /// <param name="startArticle">Начальная статья</param>
         /// <param name="endArticle">Конечная статья</param>
         /// <returns>Возвращает граф путей</returns>
-        public static Graph FindShortestPaths(string startArticle, string endArticle)
+        public static Graph FindShortestPaths(string startArticle, string endArticle, int maxPath=int.MaxValue, int maxDistance = int.MaxValue)
         {
             var articleGetter = new ArticleManager();
 
@@ -105,16 +105,7 @@
                 if (!allPathsAsArrows.Contains(newPath)) allPathsAsArrows.Add(newPath);
             }
 
-            var graph = new Graph();
-
-            foreach (var arrowPath in allPathsAsArrows)
-            {
-                var path = arrowPath.Split(" -> ");
-                for (int i = 0; i < path.Length - 1; i++)
-                {
-                    graph.AddEdge(path[i], path[i + 1], i + 1);
-                }
-            }
+            var graph = new ReducedGraph(allPathsAsArrows,maxPath,maxDistance);
 
             return graph;
         }
