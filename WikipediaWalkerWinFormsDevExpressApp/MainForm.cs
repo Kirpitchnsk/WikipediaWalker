@@ -9,7 +9,7 @@ namespace WikipediaWalkerWinFormsDevExpressApp
 {
     public partial class MainForm : XtraForm
     {
-        private Graph graph;
+        private ReducedGraph graph;
         private int shortestDistance;
         private int numberOfPaths;
         private string startArticle;
@@ -21,6 +21,7 @@ namespace WikipediaWalkerWinFormsDevExpressApp
         public MainForm()
         {
             InitializeComponent();
+            maxLengthPath = int.MaxValue;
         }
 
         /// <summary>
@@ -47,7 +48,6 @@ namespace WikipediaWalkerWinFormsDevExpressApp
 
             if (articleManager.IsArticleExists(startArticle) && articleManager.IsArticleExists(endArticle))
             {
-                maxLengthPath = int.MaxValue;
                 UpdateData();
             }
             else
@@ -67,9 +67,10 @@ namespace WikipediaWalkerWinFormsDevExpressApp
             saveToFileButton.Visible = true;
             graphVisualizer.Visible = true;
 
-            graph = PathFinder.FindShortestPaths(startArticle, endArticle, maxNumberPaths,maxLengthPath);
-            shortestDistance = graph.Dijkstra(startArticle, endArticle).Count;
-            numberOfPaths = graph.CountPaths(startArticle, endArticle);
+            graph = PathFinder.FindShortestPaths(startArticle, endArticle, maxNumberPaths, maxLengthPath);
+            var fullGraph = new ReducedGraph(graph.AllPathsAsArrows);
+            shortestDistance = fullGraph.Dijkstra(startArticle, endArticle).Count;
+            numberOfPaths = fullGraph.CountPaths(startArticle, endArticle);
 
             resultLabel.Text = $"Found {numberOfPaths} paths \n" +
                 $"with shortest distance equals {shortestDistance} between \n {startArticle} и {endArticle}";

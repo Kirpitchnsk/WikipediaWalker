@@ -45,8 +45,8 @@ namespace WikipediaWalkerDevExpressApp
                 // Генерируем случайное положение вершины
                 var position = new PointFloat(rnd.Next(100, _diagramControl.Width - 100), rnd.Next(100, _diagramControl.Height - 100));
 
-                if (isStart) position = new PointFloat(20f, _diagramControl.Height / 2);
-                if (isEnd) position = new PointFloat(_diagramControl.Width + 20f, _diagramControl.Height / 2);
+                if (isStart) position = new PointFloat(10f, _diagramControl.Height / 2);
+                if (isEnd) position = new PointFloat(_diagramControl.Width + 50f, _diagramControl.Height / 2);
 
                 // Создаем графический элемент для вершины
 
@@ -80,7 +80,12 @@ namespace WikipediaWalkerDevExpressApp
                         BeginItem = vertexItems[startVertexName],
                         EndItem = vertexItems[endVertexName],
                         BeginItemPointIndex = 1,
-                        EndItemPointIndex = 1
+                        EndItemPointIndex = 1,
+                        CanChangeRoute = false,
+                        CanDragBeginPoint = false,
+                        CanDragEndPoint = false,
+                        CanMove = false,
+                        CanSelect = false
                     };
 
                     // Добавляем линию в диаграмму

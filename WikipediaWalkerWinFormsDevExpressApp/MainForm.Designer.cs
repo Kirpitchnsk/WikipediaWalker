@@ -120,13 +120,16 @@
             // 
             // graphVisualizer
             // 
+            graphVisualizer.Appearance.HRuler.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             graphVisualizer.Location = new System.Drawing.Point(791, 25);
             graphVisualizer.Name = "graphVisualizer";
             graphVisualizer.OptionsBehavior.SelectedStencils = new DevExpress.Diagram.Core.StencilCollection(new string[] { "BasicShapes", "BasicFlowchartShapes" });
-            graphVisualizer.OptionsView.CanvasSizeMode = DevExpress.Diagram.Core.CanvasSizeMode.Fill;
             graphVisualizer.OptionsView.PageSize = new System.Drawing.SizeF(1123F, 794F);
             graphVisualizer.OptionsView.PaperKind = System.Drawing.Printing.PaperKind.A4;
             graphVisualizer.OptionsView.ShowGrid = false;
+            graphVisualizer.OptionsView.ShowPageBreaks = false;
+            graphVisualizer.OptionsView.ShowPanAndZoomPanel = true;
+            graphVisualizer.OptionsView.ShowRulers = false;
             graphVisualizer.OptionsView.Theme = DevExpress.Diagram.Core.DiagramThemes.Office;
             graphVisualizer.Size = new System.Drawing.Size(965, 830);
             graphVisualizer.TabIndex = 7;

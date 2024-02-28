@@ -8,7 +8,7 @@
         /// <param name="startArticle">Начальная статья</param>
         /// <param name="endArticle">Конечная статья</param>
         /// <returns>Возвращает граф путей</returns>
-        public static Graph FindShortestPaths(string startArticle, string endArticle, int maxPath=int.MaxValue, int maxDistance = int.MaxValue)
+        public static ReducedGraph FindShortestPaths(string startArticle, string endArticle, int maxPath=int.MaxValue, int maxDistance = int.MaxValue)
         {
             var articleGetter = new ArticleManager();
 
