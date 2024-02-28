@@ -48,6 +48,15 @@ namespace WikipediaWalkerWinFormsDevExpressApp
 
             if (articleManager.IsArticleExists(startArticle) && articleManager.IsArticleExists(endArticle))
             {
+                if (!InputValidator.CheckNumber(distanceNumberField.Text, out maxNumberPaths))
+                {
+                    XtraMessageBox.Show("Введен неверный формат числа");
+                    return;
+                }
+
+                saveToFileButton.Visible = true;
+                graphVisualizer.Visible = true;
+
                 UpdateData();
             }
             else
@@ -56,17 +65,8 @@ namespace WikipediaWalkerWinFormsDevExpressApp
             }
         }
 
-        void UpdateData()
+        private void UpdateData()
         {
-            if (!InputValidator.CheckNumber(distanceNumberField.Text, out maxNumberPaths))
-            {
-                XtraMessageBox.Show("Введен неверный формат числа");
-                return;
-            }
-
-            saveToFileButton.Visible = true;
-            graphVisualizer.Visible = true;
-
             graph = PathFinder.FindShortestPaths(startArticle, endArticle, maxNumberPaths, maxLengthPath);
             var fullGraph = new ReducedGraph(graph.AllPathsAsArrows);
             shortestDistance = fullGraph.Dijkstra(startArticle, endArticle).Count;
@@ -78,6 +78,11 @@ namespace WikipediaWalkerWinFormsDevExpressApp
             var graphVisualization = new GraphVisualizer(graphVisualizer, graph, startArticle, endArticle);
         }
 
+        /// <summary>
+        /// При нажатии на кнопку сохранения будет открыто диалоговое окно с возможностью ввесли название файла
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void saveToFileButton_Click(object sender, EventArgs e)
         {
             // Создаем объект диалогового окна сохранения файла
@@ -121,6 +126,14 @@ namespace WikipediaWalkerWinFormsDevExpressApp
         {
             var edit = sender as RadioGroup;
             maxLengthPath = edit.SelectedIndex + 1;
+            if (maxLengthPath == 4)
+            {
+                maxLengthPath = int.MaxValue;
+            }
+            if (graphVisualizer.Visible == true)
+            {
+                UpdateData();
+            }
         }
     }
 }

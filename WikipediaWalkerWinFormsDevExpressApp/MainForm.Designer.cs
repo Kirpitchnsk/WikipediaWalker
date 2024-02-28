@@ -60,7 +60,7 @@
             // 
             infoLabel.Appearance.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             infoLabel.Appearance.Options.UseFont = true;
-            infoLabel.Location = new System.Drawing.Point(224, 38);
+            infoLabel.Location = new System.Drawing.Point(234, 66);
             infoLabel.Name = "infoLabel";
             infoLabel.Size = new System.Drawing.Size(352, 47);
             infoLabel.TabIndex = 1;
@@ -110,7 +110,7 @@
             // 
             saveToFileButton.Appearance.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             saveToFileButton.Appearance.Options.UseFont = true;
-            saveToFileButton.Location = new System.Drawing.Point(256, 804);
+            saveToFileButton.Location = new System.Drawing.Point(1021, 832);
             saveToFileButton.Name = "saveToFileButton";
             saveToFileButton.Size = new System.Drawing.Size(329, 51);
             saveToFileButton.TabIndex = 6;
@@ -131,14 +131,14 @@
             graphVisualizer.OptionsView.ShowPanAndZoomPanel = true;
             graphVisualizer.OptionsView.ShowRulers = false;
             graphVisualizer.OptionsView.Theme = DevExpress.Diagram.Core.DiagramThemes.Office;
-            graphVisualizer.Size = new System.Drawing.Size(965, 830);
+            graphVisualizer.Size = new System.Drawing.Size(965, 771);
             graphVisualizer.TabIndex = 7;
             graphVisualizer.Text = "diagramControl1";
             graphVisualizer.Visible = false;
             // 
             // distanceChooseRadioGroup
             // 
-            distanceChooseRadioGroup.Location = new System.Drawing.Point(243, 482);
+            distanceChooseRadioGroup.Location = new System.Drawing.Point(76, 611);
             distanceChooseRadioGroup.Name = "distanceChooseRadioGroup";
             distanceChooseRadioGroup.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             distanceChooseRadioGroup.Properties.Appearance.Options.UseFont = true;
@@ -150,7 +150,7 @@
             // 
             // distanceNumberField
             // 
-            distanceNumberField.Location = new System.Drawing.Point(240, 670);
+            distanceNumberField.Location = new System.Drawing.Point(73, 799);
             distanceNumberField.Name = "distanceNumberField";
             distanceNumberField.Properties.Appearance.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             distanceNumberField.Properties.Appearance.Options.UseFont = true;
@@ -161,7 +161,7 @@
             // 
             infoLabel2.Appearance.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             infoLabel2.Appearance.Options.UseFont = true;
-            infoLabel2.Location = new System.Drawing.Point(243, 407);
+            infoLabel2.Location = new System.Drawing.Point(76, 536);
             infoLabel2.Name = "infoLabel2";
             infoLabel2.Size = new System.Drawing.Size(309, 47);
             infoLabel2.TabIndex = 10;
@@ -171,7 +171,7 @@
             // 
             infoLabel3.Appearance.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             infoLabel3.Appearance.Options.UseFont = true;
-            infoLabel3.Location = new System.Drawing.Point(243, 590);
+            infoLabel3.Location = new System.Drawing.Point(76, 719);
             infoLabel3.Name = "infoLabel3";
             infoLabel3.Size = new System.Drawing.Size(219, 47);
             infoLabel3.TabIndex = 11;
@@ -182,7 +182,7 @@
             Appearance.BackColor = System.Drawing.Color.FromArgb(192, 255, 255);
             Appearance.Options.UseBackColor = true;
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            ClientSize = new System.Drawing.Size(1785, 891);
+            ClientSize = new System.Drawing.Size(1785, 927);
             Controls.Add(infoLabel3);
             Controls.Add(infoLabel2);
             Controls.Add(distanceNumberField);

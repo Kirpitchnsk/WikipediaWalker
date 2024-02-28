@@ -11,10 +11,10 @@
         {
             for (int i = 0; i < allPathsAsArrows.Count; i++)
             {
-                string? arrowPath = allPathsAsArrows[i];
+                var arrowPath = allPathsAsArrows[i];
 
                 var path = arrowPath.Split(" -> ");
-                if (path.Length <= maxDistanceLength)
+                if (path.Length - 1 <= maxDistanceLength)
                 {
                     for (int j = 0; j < path.Length - 1; j++)
                     {
