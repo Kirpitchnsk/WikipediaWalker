@@ -120,7 +120,7 @@ namespace WikipediaWalkerWinFormsDevExpressApp
         private void distanceChooseRadioGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
             var edit = sender as RadioGroup;
-            maxLengthPath = edit.SelectedIndex;
+            maxLengthPath = edit.SelectedIndex + 1;
         }
     }
 }
