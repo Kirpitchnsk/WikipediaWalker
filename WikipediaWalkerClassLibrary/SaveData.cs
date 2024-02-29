@@ -1,5 +1,9 @@
 ﻿namespace WikipediaWalkerClassLibrary
 {
+    /// <summary>
+    /// Класс который сожержит себе информацию, которая будет сокранена в файл с форматом json
+    /// </summary>
+    [Serializable]
     public class SaveData
     {
         public string StartArticle { get;private set; }

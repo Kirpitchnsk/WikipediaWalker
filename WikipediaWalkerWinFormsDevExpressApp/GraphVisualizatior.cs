@@ -7,19 +7,22 @@ using WikipediaWalkerClassLibrary;
 
 namespace WikipediaWalkerDevExpressApp
 {
+    /// <summary>
+    /// Класс описывающий отображение графа в элементе DiagramComtrol
+    /// </summary>
     public class GraphVisualizer
     {
-        private readonly DiagramControl _diagramControl;
-        private readonly Graph _graph;
-        private readonly string _startArticle;
-        private readonly string _endArticle;
+        private readonly DiagramControl diagramControl;
+        private readonly Graph graph;
+        private readonly string startArticle;
+        private readonly string endArticle;
 
         public GraphVisualizer(DiagramControl diagramControl, Graph graph, string startArticle, string endArticle)
         {
-            _diagramControl = diagramControl;
-            _graph = graph;
-            _startArticle = startArticle;
-            _endArticle = endArticle;
+            this.diagramControl = diagramControl;
+            this.graph = graph;
+            this.startArticle = startArticle;
+            this.endArticle = endArticle;
 
             // Отобразить граф при создании экземпляра класса
             VisualizeGraph();
@@ -27,26 +30,28 @@ namespace WikipediaWalkerDevExpressApp
 
         public void VisualizeGraph()
         {
-            _diagramControl.Items.Clear();
+            // Очищаем поле для отрисовки
+            diagramControl.Items.Clear();
 
             // Определяем начальную и конечную вершины для выделения цветом
-            var startVertex = _startArticle; // Начальная вершина
-            var endVertex = _endArticle;   // Конечная вершина
+            var startVertex = startArticle; // Начальная вершина
+            var endVertex = endArticle;   // Конечная вершина
 
             // Отображаем вершины графа
             var vertexItems = new Dictionary<string, DiagramShape>();
             var rnd = new Random();
-            var counter = 0;
-            foreach (var vertex in _graph.AdjacencyList.Keys)
+
+            foreach (var vertex in graph.AdjacencyList.Keys)
             {
+                // Начальная ли наша вершина или конечная
                 var isStart = vertex == startVertex;
                 var isEnd = vertex == endVertex;
 
                 // Генерируем случайное положение вершины
-                var position = new PointFloat(rnd.Next(100, _diagramControl.Width - 100), rnd.Next(100, _diagramControl.Height - 100));
+                var position = new PointFloat(rnd.Next(100, diagramControl.Width - 100), rnd.Next(100, diagramControl.Height - 100));
 
-                if (isStart) position = new PointFloat(10f, _diagramControl.Height / 2);
-                if (isEnd) position = new PointFloat(_diagramControl.Width + 50f, _diagramControl.Height / 2);
+                if (isStart) position = new PointFloat(10f, diagramControl.Height / 2);
+                if (isEnd) position = new PointFloat(diagramControl.Width + 50f, diagramControl.Height / 2);
 
                 // Создаем графический элемент для вершины
 
@@ -60,13 +65,12 @@ namespace WikipediaWalkerDevExpressApp
                 };
 
                 // Добавляем вершину в диаграмму
-                _diagramControl.Items.Add(vertexShape);
+                diagramControl.Items.Add(vertexShape);
                 vertexItems[vertex] = vertexShape;
-                counter++;
             }
 
             // Отображаем ребра графа
-            foreach (var startVertexEntry in _graph.AdjacencyList)
+            foreach (var startVertexEntry in graph.AdjacencyList)
             {
                 var startVertexName = startVertexEntry.Key;
                 var startPosition = vertexItems[startVertexName];
@@ -89,7 +93,7 @@ namespace WikipediaWalkerDevExpressApp
                     };
 
                     // Добавляем линию в диаграмму
-                    _diagramControl.Items.Add(edge);
+                    diagramControl.Items.Add(edge);
                 }
             }
         }

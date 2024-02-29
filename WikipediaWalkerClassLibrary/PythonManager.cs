@@ -17,7 +17,7 @@ namespace WikipediaWalkerClassLibrary
         /// </summary>
         /// <param name="articleTitle"></param>
         /// <returns>Возвращает список всех связей текущей статьи</returns>
-        public List<string> GetLinks(string articleTitle)
+        public List<string> GetLinks_Python(string articleTitle)
         {
             PythonEngine.Initialize();
 
@@ -37,7 +37,7 @@ namespace WikipediaWalkerClassLibrary
             }
         }
 
-        public string GetArticleInfo(string articleTitle)
+        public string GetArticleInfo_Python(string articleTitle)
         {
             PythonEngine.Initialize();
 
