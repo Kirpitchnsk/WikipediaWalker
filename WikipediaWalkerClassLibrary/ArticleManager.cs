@@ -33,7 +33,7 @@
         {
             if(article.Length > 1)
             {
-                var currentArticle = article.Trim();
+                var currentArticle = article.Trim().Replace("_"," ");
                 return new string(currentArticle);
             }
             else
@@ -49,7 +49,7 @@
         /// <param name="article2">Вторая статья</param>
         public bool IsArticleExists(string article)
         {
-            return listOfArticles.Contains(article);
+            return listOfArticles.Contains(article.Trim().Replace(" ", "_"));
         }
 
         /// <summary>
