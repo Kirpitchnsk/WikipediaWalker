@@ -34,10 +34,7 @@
             if(article.Length > 1)
             {
                 var currentArticle = article.Trim();
-                var firstLetter = currentArticle[0].ToString().ToUpper();
-                var changedArticle = currentArticle.ToLower().ToCharArray();
-                changedArticle[0] = firstLetter[0];
-                return new string(changedArticle);
+                return new string(currentArticle);
             }
             else
             {
@@ -74,8 +71,8 @@
                     var parts = line.Split("\t");
                     if (parts.Length == 2)
                     {
-                        var article1 = parts[0].Trim();
-                        var article2 = parts[1].Trim();
+                        var article1 = parts[0].Trim().Replace("_"," ");
+                        var article2 = parts[1].Trim().Replace("_", " ");
 
                         // Добавление связей в хэш-таблицу
                         if (!links.ContainsKey(article1))

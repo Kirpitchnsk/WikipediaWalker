@@ -75,7 +75,7 @@ namespace WikipediaWalkerWinFormsDevExpressApp
             graph = PathFinder.FindShortestPaths(startArticle, endArticle, maxNumberPaths, maxLengthPath);
             var fullGraph = new ReducedGraph(graph.AllPathsAsArrows);
             shortestDistance = fullGraph.Dijkstra(startArticle, endArticle).Count;
-            shortestPath = String.Join(" -> ",fullGraph.Dijkstra(startArticle, endArticle));
+            shortestPath = String.Join(" -> ", fullGraph.Dijkstra(startArticle, endArticle));
             numberOfPaths = fullGraph.CountPaths(startArticle, endArticle);
             startArticleInfo = pythonManager.GetArticleInfo_Python(startArticle);
             endArticleInfo = pythonManager.GetArticleInfo_Python(endArticle);

@@ -8,11 +8,49 @@ namespace WikipediaWalkerClassLibrary
 
         private static string pythonScriptName = "python_script.py";
         private static string filePath;
+        private static int maxPythonVersion = 12;
 
-        //private static void FindPythonDllPath(string version)
-        //{
-        //    string pathVariable = Environment.
-        //}
+        private static string FindPythonDllPath()
+        {
+            var pathVariable = Environment.GetEnvironmentVariable("Path");
+
+            for (int i = 8; i <= maxPythonVersion; i++)
+            {
+                var version = "3"+i;
+                
+                if (pathVariable != null)
+                {
+                    var paths = pathVariable.Split(';');
+
+                    foreach (var path in paths)
+                    {
+                        try
+                        {
+                            var pythonDllPath = Directory.GetFiles(path, $"python{version}.dll", SearchOption.TopDirectoryOnly).FirstOrDefault();
+
+                            if (pythonDllPath != null)
+                            {
+                                return pythonDllPath;
+                            }
+                        }
+                        catch(DirectoryNotFoundException)
+                        {
+                            continue;
+                        }
+                        catch(ArgumentException)
+                        {
+                            continue;
+                        }
+                        catch(UnauthorizedAccessException)
+                        {
+                            continue;
+                        }
+                    }
+                }
+            }
+
+            return String.Empty;
+        }
 
         /// <summary>
         /// Класс, взаимодействующий с Pyhton.NET. Инициализация движка python
@@ -20,7 +58,8 @@ namespace WikipediaWalkerClassLibrary
         public PythonManager() 
         {
             //Здесь нужен путь в компьютере к этому файлу
-            Runtime.PythonDLL = "C:\\Users\\nskru\\AppData\\Local\\Programs\\Python\\Python312\\python312.dll";
+            //Runtime.PythonDLL = "C:\\Users\\nskru\\AppData\\Local\\Programs\\Python\\Python312\\python312.dll";
+            Runtime.PythonDLL = FindPythonDllPath();
             // Получаем путь к папке проекта
             var projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
 
