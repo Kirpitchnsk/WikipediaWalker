@@ -63,7 +63,9 @@ namespace WikipediaWalkerDevExpressApp
                 var vertexShape = new DiagramShape
                 {
                     Position = position,
+                    
                     Content = vertex,
+                    
                     Width = 150,
                     Height = 150,
                     BackgroundId = isStart || isEnd ? DiagramThemeColorId.Black: DiagramThemeColorId.Dark

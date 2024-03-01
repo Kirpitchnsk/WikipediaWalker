@@ -40,6 +40,7 @@
             distanceNumberField = new DevExpress.XtraEditors.TextEdit();
             infoLabel2 = new DevExpress.XtraEditors.LabelControl();
             infoLabel3 = new DevExpress.XtraEditors.LabelControl();
+            labelControl1 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)startArticleField.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)endArticleField.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)graphVisualizer).BeginInit();
@@ -110,7 +111,7 @@
             // 
             saveToFileButton.Appearance.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             saveToFileButton.Appearance.Options.UseFont = true;
-            saveToFileButton.Location = new System.Drawing.Point(1021, 832);
+            saveToFileButton.Location = new System.Drawing.Point(1052, 753);
             saveToFileButton.Name = "saveToFileButton";
             saveToFileButton.Size = new System.Drawing.Size(329, 51);
             saveToFileButton.TabIndex = 6;
@@ -131,7 +132,7 @@
             graphVisualizer.OptionsView.ShowPanAndZoomPanel = true;
             graphVisualizer.OptionsView.ShowRulers = false;
             graphVisualizer.OptionsView.Theme = DevExpress.Diagram.Core.DiagramThemes.Office;
-            graphVisualizer.Size = new System.Drawing.Size(965, 771);
+            graphVisualizer.Size = new System.Drawing.Size(965, 697);
             graphVisualizer.TabIndex = 7;
             graphVisualizer.Text = "diagramControl1";
             graphVisualizer.Visible = false;
@@ -177,12 +178,21 @@
             infoLabel3.TabIndex = 11;
             infoLabel3.Text = "The number of paths to display:";
             // 
+            // labelControl1
+            // 
+            labelControl1.Location = new System.Drawing.Point(974, 861);
+            labelControl1.Name = "labelControl1";
+            labelControl1.Size = new System.Drawing.Size(407, 19);
+            labelControl1.TabIndex = 12;
+            labelControl1.Text = "You can use zoom if you need and you can move vertises";
+            // 
             // MainForm
             // 
             Appearance.BackColor = System.Drawing.Color.FromArgb(192, 255, 255);
             Appearance.Options.UseBackColor = true;
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             ClientSize = new System.Drawing.Size(1785, 927);
+            Controls.Add(labelControl1);
             Controls.Add(infoLabel3);
             Controls.Add(infoLabel2);
             Controls.Add(distanceNumberField);
@@ -221,6 +231,7 @@
         private DevExpress.XtraEditors.TextEdit distanceNumberField;
         private DevExpress.XtraEditors.LabelControl infoLabel2;
         private DevExpress.XtraEditors.LabelControl infoLabel3;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
     }
 }
 

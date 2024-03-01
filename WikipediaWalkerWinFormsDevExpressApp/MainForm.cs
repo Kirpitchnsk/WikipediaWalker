@@ -20,11 +20,13 @@ namespace WikipediaWalkerWinFormsDevExpressApp
         private int maxLengthPath;
         private string startArticleInfo;
         private string endArticleInfo;
+        private PythonManager pythonManager;
 
         public MainForm()
         {
             InitializeComponent();
             maxLengthPath = int.MaxValue;
+            pythonManager = new PythonManager();
         }
 
         /// <summary>
@@ -70,12 +72,10 @@ namespace WikipediaWalkerWinFormsDevExpressApp
 
         private void UpdateData()
         {
-            var pythonManager = new PythonManager();
-
             graph = PathFinder.FindShortestPaths(startArticle, endArticle, maxNumberPaths, maxLengthPath);
             var fullGraph = new ReducedGraph(graph.AllPathsAsArrows);
             shortestDistance = fullGraph.Dijkstra(startArticle, endArticle).Count;
-            shortestPath = String.Join(" -> ",fullGraph.Dijkstra(startArticle, endArticle));
+            shortestPath = String.Join(" -> ", fullGraph.Dijkstra(startArticle, endArticle));
             numberOfPaths = fullGraph.CountPaths(startArticle, endArticle);
             startArticleInfo = pythonManager.GetArticleInfo_Python(startArticle);
             endArticleInfo = pythonManager.GetArticleInfo_Python(endArticle);
