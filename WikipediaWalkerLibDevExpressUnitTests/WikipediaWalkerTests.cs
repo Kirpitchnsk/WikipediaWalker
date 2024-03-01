@@ -16,41 +16,12 @@ public class WikipediaWalkerTests
     }
 
     [Test]
-    public void InputArticleCorrect_Test()
-    {
-        // Создание списка с тетстируемыми данными
-        var testArticles = new List<string>
-        {
-            "Moscow",
-            " ",
-            " california",
-            "random"
-        };
-
-        // Создание списка с ожидаемыми результатами
-        var testArticlesResults = new List<string>
-        {
-            "Moscow",
-            " ",
-            "California",
-            "Random"
-        };
-
-        // Проверка соотвествует ли результаты ожидаемым
-        for(int i = 0;i< testArticlesResults.Count;i++)
-        {
-            var correctString = ArticleManager.InputArticleCorrect(testArticles[i]);
-            Assert.AreEqual(correctString, testArticlesResults[i]);
-        }
-    }
-
-    [Test]
     public void CheckSpelling_Test()
     {
-        Assert.IsTrue(ArticleManager.IsArticleExists("London", "Moscow"));
-        Assert.IsFalse(ArticleManager.IsArticleExists("   Landon", "Moscow"));
-        Assert.IsTrue(ArticleManager.IsArticleExists("California", "Cambodia"));
-        Assert.IsFalse(ArticleManager.IsArticleExists(" ", "Z"));
+        Assert.IsTrue(articleManager.IsArticleExists("London"));
+        Assert.IsFalse(articleManager.IsArticleExists("Crac"));
+        Assert.IsTrue(articleManager.IsArticleExists("Ottoman Empire"));
+        Assert.IsFalse(articleManager.IsArticleExists("Z"));
     }
 
     [Test]
@@ -147,7 +118,7 @@ public class WikipediaWalkerTests
     public void ConvertToJson_WhenValidObjectProvided_ReturnsJsonString()
     {
         // Arrange
-        var data = new SaveData("Moscow","London",2,526,"Start Info","End Info");
+        var data = new SaveData("Moscow","London",2, "Moscow -> London",526,"Start Info","End Info");
 
         // Act
         var jsonString = jsonConverter.ConvertToJson(data);
@@ -158,6 +129,7 @@ public class WikipediaWalkerTests
         Assert.IsTrue(jsonString.Contains("Moscow"));
         Assert.IsTrue(jsonString.Contains("London"));
         Assert.IsTrue(jsonString.Contains("2"));
+        Assert.IsTrue(jsonString.Contains("Moscow -> London"));
         Assert.IsTrue(jsonString.Contains("526"));
         Assert.IsTrue(jsonString.Contains("Start Info"));
         Assert.IsTrue(jsonString.Contains("End Info"));
@@ -167,7 +139,7 @@ public class WikipediaWalkerTests
     public void ConvertFromJson_WhenValidJsonStringProvided_ReturnsObject()
     {
         // Arrange
-        string jsonString = "{\"StartArticle\":\"Moscow\",\"EndArticle\":\"London\",\"ShortestDistance\":2,\"NumberOfPath\":526,\"StartArticleInfo\":\"\",\"EndArticleInfo\":\"\"}";
+        string jsonString = "{\"StartArticle\":\"Moscow\",\"EndArticle\":\"London\",\"ShortestDistance\":2,\"ShortestPath\":\"Moscow -> London\",\"NumberOfPath\":526,\"StartArticleInfo\":\"\",\"EndArticleInfo\":\"\"}";
 
         // Act
         SaveData deserializedData = jsonConverter.ConvertFromJson(jsonString);
@@ -176,6 +148,7 @@ public class WikipediaWalkerTests
         Assert.IsNotNull(deserializedData);
         Assert.AreEqual("Moscow", deserializedData.StartArticle);
         Assert.AreEqual(2, deserializedData.ShortestDistance);
+        Assert.AreEqual("Moscow -> London", deserializedData.ShortestPath);
         Assert.AreEqual(526, deserializedData.NumberOfPath);
         Assert.AreEqual("London", deserializedData.EndArticle);
         Assert.AreEqual("", deserializedData.StartArticleInfo);

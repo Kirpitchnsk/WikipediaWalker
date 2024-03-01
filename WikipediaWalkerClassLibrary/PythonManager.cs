@@ -58,8 +58,8 @@ namespace WikipediaWalkerClassLibrary
         public PythonManager() 
         {
             //Здесь нужен путь в компьютере к этому файлу
-            Runtime.PythonDLL = "C:\\Users\\nskru\\AppData\\Local\\Programs\\Python\\Python312\\python312.dll";
-            // Runtime.PythonDLL = FindPythonDllPath();
+            //Runtime.PythonDLL = "C:\\Users\\nskru\\AppData\\Local\\Programs\\Python\\Python312\\python312.dll";
+            Runtime.PythonDLL = FindPythonDllPath();
             // Получаем путь к папке проекта
             var projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
 
