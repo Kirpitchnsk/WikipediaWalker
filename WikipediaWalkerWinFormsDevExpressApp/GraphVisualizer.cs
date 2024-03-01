@@ -66,7 +66,7 @@ namespace WikipediaWalkerDevExpressApp
                     Content = vertex,
                     Width = 150,
                     Height = 150,
-                    BackgroundId = isStart || isEnd ? DiagramThemeColorId.Black: DiagramThemeColorId.Accent6_1
+                    BackgroundId = isStart || isEnd ? DiagramThemeColorId.Black: DiagramThemeColorId.Dark
                 };
 
                 // Добавляем вершину в диаграмму

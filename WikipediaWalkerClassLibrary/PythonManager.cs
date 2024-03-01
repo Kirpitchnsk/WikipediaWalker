@@ -1,16 +1,33 @@
 ﻿using Python.Runtime;
+using System.Text;
 
 namespace WikipediaWalkerClassLibrary
 {
     public class PythonManager
     {
+
+        private static string pythonScriptName = "python_script.py";
+        private static string filePath;
+
         /// <summary>
         /// Класс, взаимодействующий с Pyhton.NET. Инициализация движка python
         /// </summary>
         public PythonManager() 
         {
             //Здесь нужен путь в компьютере к этому файлу
-            Runtime.PythonDLL = @"С:\Users\nskru\AppData\Local\Programs\Python\python312.dll";
+            Runtime.PythonDLL = "C:\\Users\\nskru\\AppData\\Local\\Programs\\Python\\Python312\\python312.dll";
+            // Получаем путь к папке проекта
+            var projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+
+            // Формируем полный путь к файлу
+            filePath = Path.Combine(projectDirectory, pythonScriptName);
+
+            var newFileName = "wiki.py";
+            if (!File.Exists(newFileName))
+            {
+                File.Copy(filePath,newFileName);
+            }
+            pythonScriptName = newFileName.Substring(0, newFileName.Length - 3);
         }
 
         /// <summary>
@@ -20,38 +37,49 @@ namespace WikipediaWalkerClassLibrary
         /// <returns>Возвращает список всех связей текущей статьи</returns>
         public List<string> GetLinks_Python(string articleTitle)
         {
-            PythonEngine.Initialize();
-
-            using (Py.GIL())
+            if(filePath != null) 
             {
-                var pythonScript = Py.Import("wikipedia");
-                var result = pythonScript.InvokeMethod("get_page_links", new PyObject[] { new PyString(articleTitle) });
-                var pyList = new PyList(result);
+                PythonEngine.Initialize();
 
-                var links = new List<string>();
-                foreach (var link in pyList)
+                using (Py.GIL())
                 {
-                    links.Add(link.ToString());
-                }
+                    var pythonScript = Py.Import(pythonScriptName);
+                    var result = pythonScript.InvokeMethod("get_page_links", new PyObject[] { new PyString(articleTitle) });
+                    var pyList = new PyList(result);
 
-                PythonEngine.Shutdown();
-                return links;
+                    var links = new List<string>();
+                    foreach (var link in pyList)
+                    {
+                        links.Add(link.ToString());
+                    }
+
+                    return links;
+                }
+            }
+            else
+            {
+                return new List<string>();
             }
         }
 
         public string GetArticleInfo_Python(string articleTitle)
         {
-            PythonEngine.Initialize();
-
-            using (Py.GIL())
+            if(filePath != null)
             {
-                var pythonScript = Py.Import("wikipedia");
-                var result = pythonScript.InvokeMethod("get_article_info", new PyObject[] { new PyString(articleTitle) });
-                var articleInfo = new PyString(result);
+                PythonEngine.Initialize();
 
-                PythonEngine.Shutdown();
+                using (Py.GIL())
+                {
+                    var pythonScript = Py.Import(pythonScriptName);
+                    var result = pythonScript.InvokeMethod("get_wikipedia_info", new PyObject[] { new PyString(articleTitle) });
+                    var articleInfo = new PyString(result);
 
-                return articleInfo.ToString();
+                    return articleInfo.ToString();
+                }
+            }
+            else
+            {
+                return string.Empty;
             }
         }
     }

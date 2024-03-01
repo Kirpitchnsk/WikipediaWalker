@@ -18,9 +18,7 @@ def get_wikipedia_info(page_title):
     page = get_api_page(page_title)
 
     if is_page_exists(page_title):
-        return "Название статьи: "+page.title
-        "URL статьи: "+ page.fullurl
-        +"Краткое описание: "+page.summary
+        return "Название статьи: "+page.title +" URL статьи: "+ page.fullurl +" Краткое описание: "+page.summary
     else:
         return "No data"
 

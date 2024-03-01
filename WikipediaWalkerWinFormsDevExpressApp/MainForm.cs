@@ -17,6 +17,8 @@ namespace WikipediaWalkerWinFormsDevExpressApp
         private ArticleManager articleManager;
         private int maxNumberPaths;
         private int maxLengthPath;
+        private string startArticleInfo;
+        private string endArticleInfo;
 
         public MainForm()
         {
@@ -67,10 +69,14 @@ namespace WikipediaWalkerWinFormsDevExpressApp
 
         private void UpdateData()
         {
+            var pythonManager = new PythonManager();
+
             graph = PathFinder.FindShortestPaths(startArticle, endArticle, maxNumberPaths, maxLengthPath);
             var fullGraph = new ReducedGraph(graph.AllPathsAsArrows);
             shortestDistance = fullGraph.Dijkstra(startArticle, endArticle).Count;
             numberOfPaths = fullGraph.CountPaths(startArticle, endArticle);
+            startArticleInfo = pythonManager.GetArticleInfo_Python(startArticle);
+            endArticleInfo = pythonManager.GetArticleInfo_Python(endArticle);
 
             resultLabel.Text = $"Found {numberOfPaths} paths \n" +
                 $"with shortest distance equals {shortestDistance} between \n {startArticle} и {endArticle}";
@@ -106,7 +112,7 @@ namespace WikipediaWalkerWinFormsDevExpressApp
                     var jsonConverter = new JsonConverter<SaveData>();
 
                     // Создаем объект сохраняемых данных
-                    var saveData = new SaveData(startArticle, endArticle, shortestDistance, numberOfPaths, "", "");
+                    var saveData = new SaveData(startArticle, endArticle, shortestDistance, numberOfPaths, startArticleInfo, endArticleInfo);
 
                     // Преобразуем объект в JSON строку
                     var json = jsonConverter.ConvertToJson(saveData);
