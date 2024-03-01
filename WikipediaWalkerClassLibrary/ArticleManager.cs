@@ -19,8 +19,8 @@
         /// </summary>
         public ArticleManager()
         {
-            distancesBetweenArticles = Resource1.links.Split("\n").ToList();
-            listOfArticles = Resource1.articles.Split("\n").ToList();
+            distancesBetweenArticles = Resource1.links.Split(new string[] { "\n","\r","\r\n" }, StringSplitOptions.None).ToList();
+            listOfArticles = Resource1.articles.Split(new string[] { "\n", "\r", "\r\n" }, StringSplitOptions.None).ToList();
             articleLinks = ReadArticleLinks();
         }
 

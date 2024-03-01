@@ -9,6 +9,11 @@ namespace WikipediaWalkerClassLibrary
         private static string pythonScriptName = "python_script.py";
         private static string filePath;
 
+        //private static void FindPythonDllPath(string version)
+        //{
+        //    string pathVariable = Environment.
+        //}
+
         /// <summary>
         /// Класс, взаимодействующий с Pyhton.NET. Инициализация движка python
         /// </summary>
