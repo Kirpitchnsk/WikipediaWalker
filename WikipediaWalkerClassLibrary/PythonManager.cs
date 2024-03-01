@@ -9,7 +9,8 @@ namespace WikipediaWalkerClassLibrary
         /// </summary>
         public PythonManager() 
         {
-            Runtime.PythonDLL = @"python312.dll";
+            //Здесь нужен путь в компьютере к этому файлу
+            Runtime.PythonDLL = @"С:\Users\nskru\AppData\Local\Programs\Python\python312.dll";
         }
 
         /// <summary>
@@ -33,6 +34,7 @@ namespace WikipediaWalkerClassLibrary
                     links.Add(link.ToString());
                 }
 
+                PythonEngine.Shutdown();
                 return links;
             }
         }
@@ -46,6 +48,8 @@ namespace WikipediaWalkerClassLibrary
                 var pythonScript = Py.Import("wikipedia");
                 var result = pythonScript.InvokeMethod("get_article_info", new PyObject[] { new PyString(articleTitle) });
                 var articleInfo = new PyString(result);
+
+                PythonEngine.Shutdown();
 
                 return articleInfo.ToString();
             }

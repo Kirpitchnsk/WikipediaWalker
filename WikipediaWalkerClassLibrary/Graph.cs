@@ -1,7 +1,4 @@
-﻿using DevExpress.Diagram.Core.Layout;
-using DevExpress.Utils.DirectXPaint;
-
-namespace WikipediaWalkerClassLibrary
+﻿namespace WikipediaWalkerClassLibrary
 {
     public class Graph
     {

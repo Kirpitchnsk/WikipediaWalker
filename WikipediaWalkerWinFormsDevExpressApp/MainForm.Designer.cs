@@ -163,9 +163,9 @@
             infoLabel2.Appearance.Options.UseFont = true;
             infoLabel2.Location = new System.Drawing.Point(76, 536);
             infoLabel2.Name = "infoLabel2";
-            infoLabel2.Size = new System.Drawing.Size(309, 47);
+            infoLabel2.Size = new System.Drawing.Size(340, 47);
             infoLabel2.TabIndex = 10;
-            infoLabel2.Text = "Number of distances:";
+            infoLabel2.Text = "Display paths of length:";
             // 
             // infoLabel3
             // 
@@ -173,9 +173,9 @@
             infoLabel3.Appearance.Options.UseFont = true;
             infoLabel3.Location = new System.Drawing.Point(76, 719);
             infoLabel3.Name = "infoLabel3";
-            infoLabel3.Size = new System.Drawing.Size(219, 47);
+            infoLabel3.Size = new System.Drawing.Size(451, 47);
             infoLabel3.TabIndex = 11;
-            infoLabel3.Text = "Print max path:";
+            infoLabel3.Text = "The number of paths to display:";
             // 
             // MainForm
             // 

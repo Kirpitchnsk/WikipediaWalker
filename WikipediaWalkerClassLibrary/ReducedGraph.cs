@@ -1,5 +1,6 @@
 ﻿namespace WikipediaWalkerClassLibrary
 {
+
     /// <summary>
     /// Класс который хранит в себе граф, сокращающий число отображаемых путей и выделяющий длины путей
     /// </summary>

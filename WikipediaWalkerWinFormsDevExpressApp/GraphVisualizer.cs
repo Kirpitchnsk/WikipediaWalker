@@ -7,6 +7,7 @@ using WikipediaWalkerClassLibrary;
 
 namespace WikipediaWalkerDevExpressApp
 {
+
     /// <summary>
     /// Класс описывающий отображение графа в элементе DiagramComtrol
     /// </summary>
@@ -23,9 +24,6 @@ namespace WikipediaWalkerDevExpressApp
             this.graph = graph;
             this.startArticle = startArticle;
             this.endArticle = endArticle;
-
-            // Отобразить граф при создании экземпляра класса
-            VisualizeGraph();
         }
 
         public void VisualizeGraph()
@@ -50,8 +48,15 @@ namespace WikipediaWalkerDevExpressApp
                 // Генерируем случайное положение вершины
                 var position = new PointFloat(rnd.Next(100, diagramControl.Width - 100), rnd.Next(100, diagramControl.Height - 100));
 
-                if (isStart) position = new PointFloat(10f, diagramControl.Height / 2);
-                if (isEnd) position = new PointFloat(diagramControl.Width + 50f, diagramControl.Height / 2);
+                // В случае если просматриваемая вершина начальная или конечная, она распологаться в опредееленном месте
+                if (isStart)
+                {
+                    position = new PointFloat(10f, diagramControl.Height / 2);
+                }
+                if (isEnd)
+                {
+                    position = new PointFloat(diagramControl.Width + 50f, diagramControl.Height / 2);
+                }
 
                 // Создаем графический элемент для вершины
 
@@ -73,7 +78,6 @@ namespace WikipediaWalkerDevExpressApp
             foreach (var startVertexEntry in graph.AdjacencyList)
             {
                 var startVertexName = startVertexEntry.Key;
-                var startPosition = vertexItems[startVertexName];
                 foreach (var endVertexEntry in startVertexEntry.Value)
                 {
                     var endVertexName = endVertexEntry.Key;

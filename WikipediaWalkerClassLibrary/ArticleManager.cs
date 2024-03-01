@@ -8,9 +8,9 @@
         private static Dictionary<string, List<string>> articleLinks;
 
         /// <summary>
-        /// Хранение данных из файла со связями
+        /// Список для хранения строк со статьей и ссылкой на нее
         /// </summary>
-        private static string distancesBetweenArticles;
+        private static List<string> distancesBetweenArticles;
 
         private static List<string> listOfArticles;
         
@@ -19,7 +19,7 @@
         /// </summary>
         public ArticleManager()
         {
-            distancesBetweenArticles = Resource1.links;
+            distancesBetweenArticles = Resource1.links.Split("\n").ToList();
             listOfArticles = Resource1.articles.Split("\n").ToList();
             articleLinks = ReadArticleLinks();
         }
@@ -27,9 +27,9 @@
         /// <summary>
         /// Преобразование названия статьи к виду первая буква заглавная, остальные прописные
         /// </summary>
-        /// <param name="article">Назавние статьи</param>
-        /// <returns>Врзврат преобразованной строки</returns>
-        public string InputArticleCorrect(string article)
+        /// <param name="article">Название статьи</param>
+        /// <returns>Возврат преобразованной строки</returns>
+        public string ConvertArticleToReadbleForm(string article)
         {
             if(article.Length > 1)
             {
@@ -67,7 +67,7 @@
             try
             {
                 // Чтение связей из файла
-                var lines = distancesBetweenArticles.Split("\n");
+                var lines = distancesBetweenArticles;
 
                 foreach (var line in lines)
                 {

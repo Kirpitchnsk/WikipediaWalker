@@ -41,8 +41,8 @@ namespace WikipediaWalkerWinFormsDevExpressApp
         {
             articleManager = new ArticleManager();
 
-            startArticle = articleManager.InputArticleCorrect(startArticleField.Text);
-            endArticle = articleManager.InputArticleCorrect(endArticleField.Text);
+            startArticle = articleManager.ConvertArticleToReadbleForm(startArticleField.Text);
+            endArticle = articleManager.ConvertArticleToReadbleForm(endArticleField.Text);
             startArticleField.Text = startArticle.ToString();
             endArticleField.Text = endArticle.ToString();
 
@@ -76,6 +76,7 @@ namespace WikipediaWalkerWinFormsDevExpressApp
                 $"with shortest distance equals {shortestDistance} between \n {startArticle} и {endArticle}";
 
             var graphVisualization = new GraphVisualizer(graphVisualizer, graph, startArticle, endArticle);
+            graphVisualization.VisualizeGraph();
         }
 
         /// <summary>
@@ -113,11 +114,11 @@ namespace WikipediaWalkerWinFormsDevExpressApp
                     // Записываем JSON строку в файл
                     File.WriteAllText(filePath, json);
 
-                    XtraMessageBox.Show("Данные успешно сохранены в файл JSON.", "Сохранение завершено", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    XtraMessageBox.Show("The data has been successfully saved in file JSON.", "Saving is complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    XtraMessageBox.Show($"Произошла ошибка при сохранении файла: {ex.Message}", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    XtraMessageBox.Show($"An error occurred durning saving: {ex.Message}", "Error saving", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
