@@ -1,8 +1,3 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.IO.Enumeration;
-using System.Reflection;
-
 namespace WikipediaWalker
 {
     class Program
