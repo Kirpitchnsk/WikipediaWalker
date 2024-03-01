@@ -11,6 +11,7 @@ namespace WikipediaWalkerWinFormsDevExpressApp
     {
         private ReducedGraph graph;
         private int shortestDistance;
+        private string shortestPath;
         private int numberOfPaths;
         private string startArticle;
         private string endArticle;
@@ -74,12 +75,14 @@ namespace WikipediaWalkerWinFormsDevExpressApp
             graph = PathFinder.FindShortestPaths(startArticle, endArticle, maxNumberPaths, maxLengthPath);
             var fullGraph = new ReducedGraph(graph.AllPathsAsArrows);
             shortestDistance = fullGraph.Dijkstra(startArticle, endArticle).Count;
+            shortestPath = String.Join(" -> ",fullGraph.Dijkstra(startArticle, endArticle));
             numberOfPaths = fullGraph.CountPaths(startArticle, endArticle);
             startArticleInfo = pythonManager.GetArticleInfo_Python(startArticle);
             endArticleInfo = pythonManager.GetArticleInfo_Python(endArticle);
 
             resultLabel.Text = $"Found {numberOfPaths} paths \n" +
-                $"with shortest distance equals {shortestDistance} between \n {startArticle} и {endArticle}";
+                $"with shortest distance equals {shortestDistance} between \n {startArticle} и {endArticle}.\n" +
+                $"Shortest path is {shortestPath}";
 
             var graphVisualization = new GraphVisualizer(graphVisualizer, graph, startArticle, endArticle);
             graphVisualization.VisualizeGraph();
@@ -112,7 +115,7 @@ namespace WikipediaWalkerWinFormsDevExpressApp
                     var jsonConverter = new JsonConverter<SaveData>();
 
                     // Создаем объект сохраняемых данных
-                    var saveData = new SaveData(startArticle, endArticle, shortestDistance, numberOfPaths, startArticleInfo, endArticleInfo);
+                    var saveData = new SaveData(startArticle, endArticle, shortestDistance, shortestPath, numberOfPaths, startArticleInfo, endArticleInfo);
 
                     // Преобразуем объект в JSON строку
                     var json = jsonConverter.ConvertToJson(saveData);
